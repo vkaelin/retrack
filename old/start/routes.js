@@ -17,8 +17,13 @@
 const Route = use('Route')
 
 Route.get('/', () => {
-  return { greeting: 'Hello world in JSON from retrack' }
+  return { greeting: 'Hello world in JSON' }
 })
 
-Route.post('/login', 'AuthController.login')
+Route.post('/login', 'AuthController.login').validator('SessionStore')
 Route.post('/register', 'AuthController.register')
+
+Route.group(() => {
+  Route.get('me', 'AuthController.current')
+  // Route.delete('sessions', 'SessionController.destroy')
+}).middleware('auth')

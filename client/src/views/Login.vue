@@ -16,7 +16,7 @@
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-        <form action="#" method="POST">
+        <form @submit.prevent="login" method="POST">
           <div>
             <label
               for="email"
@@ -24,6 +24,7 @@
             >Email address</label>
             <div class="mt-1 rounded-md shadow-sm">
               <input
+                v-model="email"
                 id="email"
                 type="email"
                 required
@@ -36,6 +37,7 @@
             <label for="password" class="block text-sm font-medium leading-5 text-gray-700">Password</label>
             <div class="mt-1 rounded-md shadow-sm">
               <input
+                v-model="password"
                 id="password"
                 type="password"
                 required
@@ -71,3 +73,21 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+
+  methods: {
+    login () {
+      console.log('login', this.email, this.password)
+      this.$axios.post('/login', { uid: this.email, password: this.password })
+    }
+  }
+}
+</script>
