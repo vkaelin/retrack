@@ -1,6 +1,10 @@
 'use strict'
 
 class AuthController {
+  async current ({ auth }) {
+    return auth.user
+  }
+  
   async login({ auth, request, response }) {
     const { uid, password } = request.all()
     console.log(uid, password)

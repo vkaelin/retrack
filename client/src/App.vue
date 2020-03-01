@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 import Default from '@/layouts/Default.vue'
 import Visitor from '@/layouts/Visitor.vue'
 
@@ -21,14 +20,6 @@ export default {
     layout () {
       return (this.$route.meta.layout || 'Default')
     }
-  },
-
-  created () {
-    this.getCurrentUser()
-  },
-
-  methods: {
-    ...mapActions('auth', ['getCurrentUser'])
   }
 }
 </script>

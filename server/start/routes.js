@@ -22,3 +22,8 @@ Route.get('/', () => {
 
 Route.post('/login', 'AuthController.login')
 Route.post('/register', 'AuthController.register')
+
+Route.group(() => {
+  Route.get('me', 'AuthController.current')
+  // Route.delete('sessions', 'SessionController.destroy')
+}).middleware('auth')
