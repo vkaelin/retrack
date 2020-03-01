@@ -84,9 +84,10 @@ export default {
   },
 
   methods: {
-    login () {
+    async login () {
       console.log('login', this.email, this.password)
-      this.$axios.post('/login', { uid: this.email, password: this.password })
+      await this.$store.dispatch('auth/login', { uid: this.email, password: this.password })
+      this.$router.push({ name: 'tasks' })
     }
   }
 }

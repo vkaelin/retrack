@@ -20,10 +20,10 @@ Route.get('/', () => {
   return { greeting: 'Hello world in JSON from retrack' }
 })
 
-Route.post('/login', 'AuthController.login')
-Route.post('/register', 'AuthController.register')
+Route.post('sessions', 'SessionController.store')
+Route.post('register', 'UserController.register')
 
 Route.group(() => {
-  Route.get('me', 'AuthController.current')
-  // Route.delete('sessions', 'SessionController.destroy')
+  Route.get('me', 'UserController.current')
+  Route.delete('sessions', 'SessionController.destroy')
 }).middleware('auth')

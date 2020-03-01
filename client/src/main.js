@@ -6,10 +6,16 @@ import router from './router'
 import store from './store'
 
 Vue.config.productionTip = false
-Vue.use(VueAxios)
+Vue.use(VueAxios);
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+(async () => {
+  if (!store.state.userChecked) {
+    await store.dispatch('auth/getCurrentUser')
+  }
+
+  new Vue({
+    router,
+    store,
+    render: h => h(App)
+  }).$mount('#app')
+})()

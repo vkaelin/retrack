@@ -44,11 +44,11 @@ const router = new Router({
   ]
 })
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach((to, from, next) => {
   // Check if user is auth
-  if (!store.state.userChecked) {
-    await store.dispatch('auth/getCurrentUser')
-  }
+  // if (!store.state.userChecked) {
+  //   await store.dispatch('auth/getCurrentUser')
+  // }
 
   // If the page is visitor only and the user is logged: redirect
   if (to.meta.layout === 'Visitor' && store.getters['auth/logged']) {

@@ -27,6 +27,24 @@ const actions = {
       commit('SET_AUTHENTICATE_USER', user.data)
     } catch (e) {
       commit('CHECKED_USER')
+      // throw e
+    }
+  },
+  async login ({ commit }, { uid, password }) {
+    try {
+      const user = await axios.post('sessions', { uid, password })
+      commit('SET_AUTHENTICATE_USER', user.data)
+    } catch (e) {
+      commit('CHECKED_USER')
+      // throw e
+    }
+  },
+  async logout ({ commit }) {
+    try {
+      await axios.delete('sessions')
+
+      commit('LOGOUT')
+    } catch (e) {
       throw e
     }
   }

@@ -18,7 +18,7 @@ export default {
 
   computed: {
     layout () {
-      return (this.$route.meta.layout || 'Default')
+      return this.$route.name ? (this.$route.meta.layout || 'Default') : null
     }
   }
 }

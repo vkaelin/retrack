@@ -81,8 +81,8 @@
                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >Settings</a>
                       <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        @click="logout"
+                        class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100"
                       >Sign out</a>
                     </div>
                   </div>
@@ -166,8 +166,8 @@
             class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
           >Settings</a>
           <a
-            href="#"
-            class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+            @click="logout"
+            class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 cursor-pointer hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
           >Sign out</a>
         </div>
       </div>
@@ -181,6 +181,15 @@ export default {
     return {
       profileOpen: false,
       sideOpen: false
+    }
+  },
+
+  methods: {
+    async logout () {
+      try {
+        await this.$store.dispatch('auth/logout')
+        this.$router.push('/login')
+      } catch (e) {}
     }
   }
 }
