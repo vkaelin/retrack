@@ -65,7 +65,7 @@ module.exports = {
   cookie: {
     httpOnly: true,
     path: '/',
-    domain: 'retrack.com',
+    domain: Env.get('COOKIE_DOMAIN', 'retrack.com'),
     sameSite: false
   },
 
