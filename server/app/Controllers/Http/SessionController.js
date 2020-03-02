@@ -6,7 +6,7 @@ class SessionController {
     console.log(uid, password)
 
     await auth.logout()
-    const user = await auth.remember(true).attempt(uid, password)
+    const user = await auth.attempt(uid, password)
 
     return user
   }
