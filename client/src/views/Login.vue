@@ -18,10 +18,16 @@
       <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
         <form @submit.prevent="login" method="POST">
           <div>
-            <label
-              for="email"
-              class="block text-sm font-medium leading-5 text-gray-700"
-            >Email address</label>
+            <div class="flex justify-between items-center">
+              <label
+                for="email"
+                class="block text-sm font-medium leading-5 text-gray-700"
+              >Email address</label>
+              <div
+                v-if="errors.uid"
+                class="mr-1 block text-xs italic leading-5 text-red-400"
+              >{{ errors.uid.message }}</div>
+            </div>
             <div class="mt-1 rounded-md shadow-sm">
               <input
                 v-model="email"
@@ -34,7 +40,16 @@
           </div>
 
           <div class="mt-6">
-            <label for="password" class="block text-sm font-medium leading-5 text-gray-700">Password</label>
+            <div class="flex justify-between items-center">
+              <label
+                for="password"
+                class="block text-sm font-medium leading-5 text-gray-700"
+              >Password</label>
+              <div
+                v-if="errors.password"
+                class="mr-1 block text-xs italic leading-5 text-red-400"
+              >{{ errors.password.message }}</div>
+            </div>
             <div class="mt-1 rounded-md shadow-sm">
               <input
                 v-model="password"
@@ -78,16 +93,24 @@
 export default {
   data () {
     return {
-      email: '',
-      password: ''
+      email: null,
+      password: null,
+      errors: {}
     }
   },
 
   methods: {
     async login () {
       console.log('login', this.email, this.password)
-      await this.$store.dispatch('auth/login', { uid: this.email, password: this.password })
-      this.$router.push({ name: 'tasks' })
+      try {
+        await this.$store.dispatch('auth/login', { uid: this.email, password: this.password })
+        this.$router.push({ name: 'tasks' })
+      } catch (e) {
+        this.errors = {}
+        for (const error of e.response.data) {
+          this.$set(this.errors, error.field, error)
+        }
+      }
     }
   }
 }

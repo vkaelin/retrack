@@ -9,9 +9,7 @@ Vue.config.productionTip = false
 Vue.use(VueAxios);
 
 (async () => {
-  if (!store.state.userChecked) {
-    await store.dispatch('auth/getCurrentUser')
-  }
+  await store.dispatch('auth/getCurrentUser')
 
   new Vue({
     router,

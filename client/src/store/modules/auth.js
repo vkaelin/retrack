@@ -1,21 +1,15 @@
 import { axios } from '@/plugins/axios'
 
 const state = {
-  currentUser: null,
-  userChecked: false
+  currentUser: null
 }
 
 const mutations = {
-  CHECKED_USER (state) {
-    state.userChecked = false
-  },
   LOGOUT (state) {
     state.currentUser = null
-    state.userChecked = false
   },
   SET_AUTHENTICATE_USER (state, user) {
     state.currentUser = user
-    state.userChecked = true
   }
 }
 
@@ -25,18 +19,14 @@ const actions = {
     try {
       const user = await axios.get('me')
       commit('SET_AUTHENTICATE_USER', user.data)
-    } catch (e) {
-      commit('CHECKED_USER')
-      // throw e
-    }
+    } catch (e) { }
   },
   async login ({ commit }, { uid, password }) {
     try {
       const user = await axios.post('sessions', { uid, password })
       commit('SET_AUTHENTICATE_USER', user.data)
     } catch (e) {
-      commit('CHECKED_USER')
-      // throw e
+      throw e
     }
   },
   async logout ({ commit }) {
