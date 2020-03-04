@@ -7,10 +7,10 @@
       >Sign in to your account</h2>
       <p class="mt-2 text-center text-sm leading-5 text-gray-600 max-w">
         Or
-        <a
-          href="#"
+        <router-link
+          :to="{name: 'register'}"
           class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
-        >register if you don't have an account</a>
+        >sign up if you don't have an account</router-link>
       </p>
     </div>
 

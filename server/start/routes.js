@@ -21,7 +21,7 @@ Route.get('/', () => {
 })
 
 Route.post('sessions', 'SessionController.store')
-Route.post('register', 'UserController.register')
+Route.post('users', 'UserController.store').validator('UserStore')
 
 Route.group(() => {
   Route.get('me', 'UserController.current')

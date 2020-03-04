@@ -37,6 +37,14 @@ const actions = {
     } catch (e) {
       throw e
     }
+  },
+  async register ({ commit }, form) {
+    try {
+      const user = await axios.post('users', form)
+      commit('SET_AUTHENTICATE_USER', user.data.user)
+    } catch (e) {
+      throw e
+    }
   }
 }
 
