@@ -4,17 +4,12 @@ const Persona = use('Persona')
 
 class SessionController {
   async store({ auth, request, response }) {
-    // const { uid, password } = request.all()
-    // console.log(uid, password)
-
-    // await auth.logout()
-    // const user = await auth.attempt(uid, password)
-
     const payload = request.only(['uid', 'password'])
     console.log(payload)
 
     const user = await Persona.verify(payload)
-    await auth.login(user)
+    const remember = request.input('remember')
+    await auth.remember(remember).login(user)
 
     return user
   }

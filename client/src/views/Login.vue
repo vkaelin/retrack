@@ -30,7 +30,7 @@
             </div>
             <div class="mt-1 rounded-md shadow-sm">
               <input
-                v-model="email"
+                v-model="form.email"
                 id="email"
                 type="email"
                 required
@@ -52,7 +52,7 @@
             </div>
             <div class="mt-1 rounded-md shadow-sm">
               <input
-                v-model="password"
+                v-model="form.password"
                 id="password"
                 type="password"
                 required
@@ -64,6 +64,7 @@
           <div class="mt-6 flex items-center justify-between">
             <div class="flex items-center">
               <input
+                v-model="form.remember"
                 id="remember_me"
                 type="checkbox"
                 class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
@@ -93,17 +94,19 @@
 export default {
   data () {
     return {
-      email: null,
-      password: null,
+      form: {
+        email: null,
+        password: null,
+        remember: false
+      },
       errors: {}
     }
   },
 
   methods: {
     async login () {
-      console.log('login', this.email, this.password)
       try {
-        await this.$store.dispatch('auth/login', { uid: this.email, password: this.password })
+        await this.$store.dispatch('auth/login', this.form)
         this.$router.push({ name: 'tasks' })
       } catch (e) {
         this.errors = {}
