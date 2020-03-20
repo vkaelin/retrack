@@ -26,4 +26,5 @@ Route.post('users', 'UserController.store').validator('UserStore')
 Route.group(() => {
   Route.get('me', 'UserController.current')
   Route.delete('sessions', 'SessionController.destroy')
+  Route.get('projects', 'ProjectController.index')
 }).middleware('auth')

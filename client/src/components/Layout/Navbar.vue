@@ -9,14 +9,14 @@
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline">
-                <a
-                  href="#"
-                  class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700"
-                >Tasks</a>
-                <a
-                  href="#"
+                <router-link
+                  :to="{ name: 'tasks' }"
+                  class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                >Tasks</router-link>
+                <router-link
+                  :to="{ name: 'projects' }"
                   class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
-                >Projects</a>
+                >Projects</router-link>
                 <a
                   href="#"
                   class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
@@ -173,8 +173,19 @@ export default {
       try {
         await this.$store.dispatch('auth/logout')
         this.$router.push('/login')
-      } catch (e) {}
+      } catch (e) { }
     }
   }
 }
 </script>
+
+<style scoped>
+.router-link-exact-active {
+  @apply bg-gray-900 text-white;
+}
+
+.router-link-exact-active:hover,
+.router-link-exact-active:focus {
+  @apply bg-gray-900;
+}
+</style>
