@@ -27,4 +27,6 @@ Route.group(() => {
   Route.get('me', 'UserController.current')
   Route.delete('sessions', 'SessionController.destroy')
   Route.get('projects', 'ProjectController.index')
+  Route.get('invoices', 'InvoiceController.index')
+  Route.post('invoices', 'InvoiceController.create').validator('InvoiceStore')
 }).middleware('auth')

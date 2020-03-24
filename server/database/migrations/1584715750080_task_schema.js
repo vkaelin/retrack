@@ -20,6 +20,7 @@ class TaskSchema extends Schema {
       table.boolean('payed').defaultTo(false)
       
       table.integer('project_id').unsigned().notNullable()
+      table.integer('invoice_id').unsigned()
     })
   }
 

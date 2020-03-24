@@ -40,7 +40,7 @@ class User extends Model {
   }
 
   projects () {
-    return this.hasMany('App/Models/Project')
+    return this.hasMany('App/Models/Project', 'id', 'owner_id')
   }
 }
 

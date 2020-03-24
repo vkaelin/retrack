@@ -20,6 +20,16 @@ class ProjectSeeder {
       name: 'NBA Website',
       owner_id: 21,
     })
+
+    await Project.create({
+      name: 'Wikipedia rebrand',
+      owner_id: 21,
+    })
+
+    await Project.create({
+      name: 'Swiss Basketball mobile app',
+      owner_id: 21,
+    })
   }
 }
 

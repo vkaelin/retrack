@@ -36,7 +36,7 @@ const router = new Router({
     {
       path: '/invoices',
       name: 'invoices',
-      component: () => import(/* webpackChunkName: "invoices" */ './views/Invoices.vue'),
+      component: () => import(/* webpackChunkName: "invoices" */ './views/Invoices/index.vue'),
       meta: {
         requiresAuth: true
       }

@@ -8,6 +8,8 @@ class InvoiceSchema extends Schema {
     this.create('invoices', (table) => {
       table.increments()
       table.timestamps()
+
+      table.integer('project_id').unsigned().notNullable()
     })
   }
 

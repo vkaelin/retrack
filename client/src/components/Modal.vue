@@ -12,7 +12,7 @@
         leave-class="transform opacity-100"
         leave-to-class="transform opacity-0"
       >
-        <div v-if="open" class="fixed inset-0">
+        <div v-if="open" @click="closeModal(false)" class="fixed inset-0">
           <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
       </transition>
@@ -33,7 +33,7 @@
           <div class="mt-5 sm:mt-6">
             <span class="flex w-full rounded-md shadow-sm">
               <button
-                @click="updateState"
+                @click="closeModal(true)"
                 type="button"
                 class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5"
               >
@@ -69,9 +69,9 @@ export default {
   },
 
   methods: {
-    updateState () {
-      this.open = !this.open
-      this.$emit('updateState', this.open)
+    closeModal (button = false) {
+      this.open = false
+      this.$emit('close', button)
     }
   }
 }
