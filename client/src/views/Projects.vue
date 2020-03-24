@@ -4,7 +4,7 @@
       <div class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl leading-9 font-bold text-white">Projects</h2>
         <button
-          class="bg-indigo-600 px-6 py-3 text-white font-medium leading-6 rounded-md shadow hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out"
+          class="bg-indigo-500 px-6 py-3 text-white font-medium leading-6 rounded-md shadow hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo transition duration-150 ease-in-out"
         >Create project</button>
       </div>
     </header>

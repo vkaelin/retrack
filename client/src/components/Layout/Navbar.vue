@@ -184,12 +184,12 @@ export default {
 </script>
 
 <style scoped>
-.router-link-exact-active {
+.router-link-active {
   @apply bg-gray-900 text-white;
 }
 
-.router-link-exact-active:hover,
-.router-link-exact-active:focus {
+.router-link-active:hover,
+.router-link-active:focus {
   @apply bg-gray-900;
 }
 </style>
