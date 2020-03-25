@@ -18,7 +18,7 @@
     <div class="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
       <div class="bg-white rounded-lg shadow py-6">
         <router-link
-          :to="{ name: 'edit-invoice', params: { id: invoice.id} }"
+          :to="{ name: 'show-invoice', params: { id: invoice.id} }"
           v-for="(invoice) in invoices"
           :key="invoice.id"
           class="flex justify-between items-center px-5 py-4 text-gray-900 border-b border-gray-200 transition duration-150 ease-in-out hover:bg-gray-50 focus:bg-gray-50 sm:px-6"

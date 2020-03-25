@@ -42,9 +42,9 @@ const router = new Router({
       }
     },
     {
-      path: '/invoices/:id/edit',
-      name: 'edit-invoice',
-      component: () => import(/* webpackChunkName: "invoices" */ './views/Invoices/_id/edit.vue'),
+      path: '/invoices/:id',
+      name: 'show-invoice',
+      component: () => import(/* webpackChunkName: "invoices" */ './views/Invoices/_id/show.vue'),
       meta: {
         requiresAuth: true
       }
