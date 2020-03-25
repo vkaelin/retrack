@@ -18,16 +18,19 @@ class ProjectSeeder {
   async run () {
     await Project.create({
       name: 'NBA Website',
+      hourly_rate: 50,
       owner_id: 21,
     })
 
     await Project.create({
       name: 'Wikipedia rebrand',
+      hourly_rate: 200,
       owner_id: 21,
     })
 
     await Project.create({
       name: 'Swiss Basketball mobile app',
+      hourly_rate: 120,
       owner_id: 21,
     })
   }

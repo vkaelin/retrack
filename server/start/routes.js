@@ -29,4 +29,6 @@ Route.group(() => {
   Route.get('projects', 'ProjectController.index')
   Route.get('invoices', 'InvoiceController.index')
   Route.post('invoices', 'InvoiceController.create').validator('InvoiceStore')
+  Route.get('invoices/:id', 'InvoiceController.show')
+  Route.put('invoices/:id', 'InvoiceController.update')
 }).middleware('auth')

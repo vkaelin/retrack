@@ -18,6 +18,30 @@ class InvoiceController {
     })
     return response.ok()
   }
+
+  async show({ auth, params, response }) {
+    try {
+      const invoice = await Invoice.query()
+      .where('id', params.id)
+      .with('project')
+      .with('project.tasks', (builder) => {
+        builder.where('invoiced', false)
+      })
+      .firstOrFail()
+
+      if (invoice.toJSON().project.owner_id !== auth.user.id) {
+        return response.forbidden()
+      }
+
+      return response.json(invoice)
+    } catch (e) {
+      return response.notFound()
+    }
+  }
+
+  async update({ auth, request, response }) {
+
+  }
 }
 
 module.exports = InvoiceController

@@ -17,7 +17,7 @@ class TaskSchema extends Schema {
       table.integer('actual_time')
       table.boolean('started').defaultTo(false)
       table.date('last_time_started')
-      table.boolean('payed').defaultTo(false)
+      table.boolean('invoiced').defaultTo(false)
       
       table.integer('project_id').unsigned().notNullable()
       table.integer('invoice_id').unsigned()

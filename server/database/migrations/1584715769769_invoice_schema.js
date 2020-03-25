@@ -9,6 +9,8 @@ class InvoiceSchema extends Schema {
       table.increments()
       table.timestamps()
 
+      table.string('status').defaultTo('Draft')
+
       table.integer('project_id').unsigned().notNullable()
     })
   }

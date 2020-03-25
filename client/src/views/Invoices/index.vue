@@ -24,10 +24,16 @@
           class="flex justify-between items-center px-5 py-4 text-gray-900 border-b border-gray-200 transition duration-150 ease-in-out hover:bg-gray-50 focus:bg-gray-50 sm:px-6"
         >
           <div class="w-1/12 font-bold">{{ invoice.id }}</div>
-          <div class="w-7/12">Project: {{ invoice.project.name }}</div>
+          <div class="w-6/12">Project: {{ invoice.project.name }}</div>
           <div
             class="w-3/12 text-cool-gray-500"
           >Created the {{ new Date(invoice.created_at).toLocaleDateString() }}</div>
+          <div class="w-1/12">
+            <span
+              :class="badgeColor(invoice.status)"
+              class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5"
+            >{{ invoice.status }}</span>
+          </div>
           <div class="w-1/12 flex items-center justify-end">
             <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
               <path
@@ -67,6 +73,18 @@ export default {
   },
 
   methods: {
+    badgeColor (status) {
+      switch (status) {
+        case 'Draft':
+          return 'bg-gray-100 text-gray-800'
+        case 'Sent':
+          return 'bg-orange-100 text-orange-800'
+        case 'Paid':
+          return 'bg-green-100 text-green-800'
+        default:
+          return ''
+      }
+    },
     async getInvoices () {
       const resp = await this.$axios.get('invoices').catch(e => console.log(e))
       this.invoices = resp.data

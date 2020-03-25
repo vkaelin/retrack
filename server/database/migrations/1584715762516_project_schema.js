@@ -10,6 +10,7 @@ class ProjectSchema extends Schema {
       table.timestamps()
 
       table.string('name', 255)
+      table.float('hourly_rate', 2)
 
       table.integer('owner_id').unsigned().notNullable()
     })
