@@ -11,10 +11,11 @@ class InvoiceController {
     return response.json(invoices)
   }
 
-  async create({ request, response }) {
+  async create({ auth, request, response }) {
     const projectId = request.input('project')
     await Invoice.create({
-      project_id: projectId
+      project_id: projectId,
+      owner_id: auth.user.id
     })
     return response.ok()
   }
@@ -22,14 +23,14 @@ class InvoiceController {
   async show({ auth, params, response }) {
     try {
       const invoice = await Invoice.query()
-      .where('id', params.id)
-      .with('project')
-      .with('project.tasks', (builder) => {
-        builder.where('invoiced', false)
-      })
-      .firstOrFail()
+        .where('id', params.id)
+        .with('project')
+        .with('project.tasks', (builder) => {
+          builder.where('invoiced', false)
+        })
+        .firstOrFail()
 
-      if (invoice.toJSON().project.owner_id !== auth.user.id) {
+      if (invoice.owner_id !== auth.user.id) {
         return response.forbidden()
       }
 
@@ -41,6 +42,20 @@ class InvoiceController {
 
   async update({ auth, request, response }) {
 
+  }
+
+  async status({ request, params, response }) {
+    const status = request.input('status')
+    if (status !== 'Sent' && status !== 'Paid') {
+      return response.badRequest()
+    }
+
+    await Invoice
+      .query()
+      .where('id', params.id)
+      .update({ status })
+
+    return response.ok()
   }
 }
 

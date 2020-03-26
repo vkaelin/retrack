@@ -12,6 +12,7 @@ class InvoiceSchema extends Schema {
       table.string('status').defaultTo('Draft')
 
       table.integer('project_id').unsigned().notNullable()
+      table.integer('owner_id').unsigned().notNullable()
     })
   }
 

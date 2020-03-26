@@ -4,6 +4,10 @@
 const Model = use('Model')
 
 class Invoice extends Model {
+  owner() {
+    return this.belongsTo('App/Models/User', 'owner_id')
+  }
+
   project() {
     return this.belongsTo('App/Models/Project', 'project_id')
   }

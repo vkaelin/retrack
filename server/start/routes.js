@@ -30,5 +30,6 @@ Route.group(() => {
   Route.get('invoices', 'InvoiceController.index')
   Route.post('invoices', 'InvoiceController.create').validator('InvoiceStore')
   Route.get('invoices/:id', 'InvoiceController.show')
-  Route.put('invoices/:id', 'InvoiceController.update')
+  Route.put('invoices/:id', 'InvoiceController.update').middleware('ownsInvoice')
+  Route.put('invoices/:id/status', 'InvoiceController.status').middleware('ownsInvoice')
 }).middleware('auth')
