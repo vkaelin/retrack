@@ -65,8 +65,8 @@ export default {
   },
 
   async created () {
-    if (!this.$store.getters['projects/projectsLoaded']) {
-      this.$store.dispatch('projects/get')
+    if (!this.$store.getters['project/projectsLoaded']) {
+      this.$store.dispatch('project/get')
     }
 
     this.getInvoices()

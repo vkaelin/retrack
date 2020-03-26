@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from '@/store/modules/auth'
-import projects from '@/store/modules/projects'
+import notification from '@/store/modules/notification'
+import project from '@/store/modules/project'
 
 Vue.use(Vuex)
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
   },
   modules: {
     auth,
-    projects
+    notification,
+    project
   }
 })

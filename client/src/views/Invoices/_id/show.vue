@@ -168,20 +168,20 @@
       </div>
     </header>
     <div class="max-w-4xl mx-auto pb-12 px-4 sm:px-6 lg:px-0">
-      <div class="bg-white rounded-lg shadow text-gray-900 overflow-x-scroll">
+      <div class="bg-white rounded-lg shadow text-gray-900 overflow-x-auto">
         <div>
           <div class="mx-auto px-12 py-20" style="min-height: 1036px;">
             <h1
               class="pb-8 text-3xl text-gray-500 font-bold uppercase border-b border-gray-300"
             >Invoice</h1>
-            <div class="mt-8 md:flex md:items-start whitespace-no-wrap">
-              <div class="w-1/2 md:px-6">
+            <div class="mt-8 sm:flex md:items-start whitespace-no-wrap">
+              <div class="w-1/2 sm:px-6">
                 <p class="text-sm text-gray-700 font-bold">To:</p>
                 <p class="mt-2">University of Somewhere</p>
                 <p>118 Bureaucracy Lane</p>
                 <p>Cityville, CA 90210</p>
               </div>
-              <div class="w-1/2 md:px-6">
+              <div class="w-1/2 sm:px-6">
                 <p class="text-sm text-gray-700 font-bold">From:</p>
                 <p class="mt-2">Retrack Inc.</p>
                 <p>Verger de Meruz 8</p>
@@ -259,8 +259,18 @@ export default {
       try {
         await this.$axios.put(`invoices/${this.$route.params.id}/status`, data)
         this.invoice.status = data.status
+        this.$store.dispatch('notification/add', {
+          type: 'success',
+          title: 'Successfully updated!',
+          message: `Invoice marked as ${data.status}.`
+        })
       } catch (e) {
         console.log(e)
+        this.$store.dispatch('notification/add', {
+          type: 'error',
+          title: 'Error!',
+          message: 'Error while updating the invoice.'
+        })
       }
     },
 

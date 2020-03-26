@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <NotificationsContainer />
     <component :is="layout">
       <router-view />
     </component>
@@ -9,11 +10,13 @@
 <script>
 import Default from '@/layouts/Default.vue'
 import Visitor from '@/layouts/Visitor.vue'
+import NotificationsContainer from '@/components/Global/NotificationsContainer.vue'
 
 export default {
   components: {
     Default,
-    Visitor
+    Visitor,
+    NotificationsContainer
   },
 
   computed: {

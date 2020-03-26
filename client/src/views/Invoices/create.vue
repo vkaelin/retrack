@@ -75,7 +75,7 @@ export default {
   },
 
   computed: {
-    ...mapState('projects', ['projects'])
+    ...mapState('project', ['projects'])
   },
 
   methods: {
@@ -85,6 +85,11 @@ export default {
 
       if (submitted && this.form.project) {
         await this.$axios.post('invoices', this.form).catch(e => console.log(e))
+        this.$store.dispatch('notification/add', {
+          type: 'success',
+          title: 'Successfully saved!',
+          message: 'You can now edit the invoice.'
+        })
         this.$emit('create')
       }
     }

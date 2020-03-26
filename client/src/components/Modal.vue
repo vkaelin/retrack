@@ -2,7 +2,7 @@
   <transition leave-active-class="duration-300">
     <div
       v-show="open"
-      class="fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center"
+      class="fixed z-50 bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center"
     >
       <transition
         enter-active-class="transition ease-out duration-300"
