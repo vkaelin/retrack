@@ -85,8 +85,10 @@
             <span class="hidden sm:block ml-3 shadow-sm rounded-md">
               <button
                 @click="downloadPDF"
+                :disabled="isDownloading"
+                :class="isDownloading ? 'bg-gray-800 border-gray-700 text-gray-400 cursor-default' : 'bg-gray-700 hover:bg-gray-600 text-white'"
                 type="button"
-                class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600 focus:outline-none focus:shadow-outline-gray focus:border-gray-800 transition duration-150 ease-in-out"
+                class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md focus:outline-none focus:shadow-outline-gray focus:border-gray-800 transition duration-150 ease-in-out"
               >
                 <svg
                   class="-ml-1 mr-2 h-5 w-5 text-gray-400"
@@ -156,10 +158,13 @@
                       href="#"
                       class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
                     >Edit</a>
-                    <a
-                      href="#"
-                      class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                    >Download</a>
+                    <button
+                      @click="downloadPDF"
+                      :disabled="isDownloading"
+                      :class="isDownloading ? 'bg-gray-200 cursor-default' : 'hover:bg-gray-100 focus:bg-gray-100'"
+                      type="button"
+                      class="block w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 focus:outline-none transition duration-150 ease-in-out"
+                    >Download</button>
                   </div>
                 </div>
               </transition>
@@ -175,9 +180,7 @@
             <h1
               class="pb-8 text-3xl text-gray-500 font-bold uppercase border-b border-gray-300"
             >Invoice</h1>
-            <div
-              class="mt-8 sm:flex sm:items-start whitespace-no-wrap"
-            >
+            <div class="mt-8 sm:flex sm:items-start whitespace-no-wrap">
               <div class="w-1/2 sm:px-6">
                 <p class="text-sm text-gray-700 font-bold">To:</p>
                 <p class="mt-2">University of Somewhere</p>
@@ -234,7 +237,8 @@ export default {
   data () {
     return {
       actionsOpen: false,
-      invoice: {}
+      invoice: {},
+      isDownloading: false
     }
   },
 
@@ -256,6 +260,9 @@ export default {
 
   methods: {
     async downloadPDF () {
+      if (this.isDownloading) return
+
+      this.isDownloading = true
       const html = this.$refs.invoice.outerHTML.replace(/sm:/g, '')
       const resp = await this.$axios.post(`invoices/${this.$route.params.id}/print`, { html }, {
         responseType: 'arraybuffer',
@@ -269,6 +276,7 @@ export default {
       link.href = window.URL.createObjectURL(blob)
       link.download = `Invoice-${this.invoice.id}.pdf`
       link.click()
+      this.isDownloading = false
     },
     async updateInvoiceStatus () {
       const data = {

@@ -9,14 +9,14 @@
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline">
-                <router-link
+                <!-- <router-link
                   :to="{ name: 'tasks' }"
                   class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
                 >Tasks</router-link>
                 <router-link
                   :to="{ name: 'projects' }"
                   class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
-                >Projects</router-link>
+                >Projects</router-link>-->
                 <a
                   href="#"
                   class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
