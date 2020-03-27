@@ -84,6 +84,7 @@
 
             <span class="hidden sm:block ml-3 shadow-sm rounded-md">
               <button
+                @click="downloadPDF"
                 type="button"
                 class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600 focus:outline-none focus:shadow-outline-gray focus:border-gray-800 transition duration-150 ease-in-out"
               >
@@ -168,13 +169,15 @@
       </div>
     </header>
     <div class="max-w-4xl mx-auto pb-12 px-4 sm:px-6 lg:px-0">
-      <div class="bg-white rounded-lg shadow text-gray-900 overflow-x-auto">
+      <div ref="invoice" class="bg-white rounded-lg shadow text-gray-900 overflow-x-auto">
         <div>
           <div class="mx-auto px-12 py-20" style="min-height: 1036px;">
             <h1
               class="pb-8 text-3xl text-gray-500 font-bold uppercase border-b border-gray-300"
             >Invoice</h1>
-            <div class="mt-8 sm:flex md:items-start whitespace-no-wrap">
+            <div
+              class="mt-8 sm:flex sm:items-start whitespace-no-wrap"
+            >
               <div class="w-1/2 sm:px-6">
                 <p class="text-sm text-gray-700 font-bold">To:</p>
                 <p class="mt-2">University of Somewhere</p>
@@ -184,8 +187,8 @@
               <div class="w-1/2 sm:px-6">
                 <p class="text-sm text-gray-700 font-bold">From:</p>
                 <p class="mt-2">Retrack Inc.</p>
-                <p>Verger de Meruz 8</p>
-                <p>1804 Corsier-sur-Vevey</p>
+                <p>Very nice street 42</p>
+                <p>1000 Lausanne</p>
                 <p>Switzerland</p>
               </div>
             </div>
@@ -252,6 +255,21 @@ export default {
   },
 
   methods: {
+    async downloadPDF () {
+      const html = this.$refs.invoice.outerHTML.replace(/sm:/g, '')
+      const resp = await this.$axios.post(`invoices/${this.$route.params.id}/print`, { html }, {
+        responseType: 'arraybuffer',
+        headers: {
+          'Accept': 'application/pdf'
+        }
+      })
+
+      const blob = new Blob([resp.data], { type: 'application/pdf' })
+      const link = document.createElement('a')
+      link.href = window.URL.createObjectURL(blob)
+      link.download = `Invoice-${this.invoice.id}.pdf`
+      link.click()
+    },
     async updateInvoiceStatus () {
       const data = {
         status: this.invoice.status === 'Draft' ? 'Sent' : 'Paid'

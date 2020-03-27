@@ -1,5 +1,6 @@
 'use strict'
 
+const puppeteer = require('puppeteer')
 const Invoice = use('App/Models/Invoice')
 
 class InvoiceController {
@@ -56,6 +57,18 @@ class InvoiceController {
       .update({ status })
 
     return response.ok()
+  }
+
+  async print({ request, response }) {
+    const browser = await puppeteer.launch({ headless: true });
+    const page = await browser.newPage();
+    await page.setContent(request.input('html'))
+    await page.addStyleTag({ url: 'https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.2.0/tailwind.min.css'})
+    const pdf = await page.pdf({ format: 'A4' });
+    await browser.close();
+
+    response.type('application/pdf')
+    return response.send(pdf)
   }
 }
 

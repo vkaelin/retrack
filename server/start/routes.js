@@ -32,4 +32,5 @@ Route.group(() => {
   Route.get('invoices/:id', 'InvoiceController.show')
   Route.put('invoices/:id', 'InvoiceController.update').middleware('ownsInvoice')
   Route.put('invoices/:id/status', 'InvoiceController.status').middleware('ownsInvoice')
+  Route.post('invoices/:id/print', 'InvoiceController.print').middleware('ownsInvoice')
 }).middleware('auth')
