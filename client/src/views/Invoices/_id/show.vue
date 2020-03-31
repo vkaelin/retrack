@@ -177,9 +177,21 @@
       <div ref="invoice" class="bg-white rounded-lg shadow text-gray-900 overflow-x-auto">
         <div>
           <div class="mx-auto px-12 py-20" style="min-height: 1036px;">
-            <h1
-              class="pb-8 text-3xl text-gray-500 font-bold uppercase border-b border-gray-300"
-            >Invoice</h1>
+            <div class="flex justify-between items-center pb-8 border-b border-gray-300">
+              <h1 class="text-3xl text-gray-500 font-bold uppercase leading-none">Invoice</h1>
+              <div class="flex items-center px-4 text-sm text-gray-700">
+                <div class="text-left font-bold">
+                  <p>Invoice No:</p>
+                  <p>Invoice date:</p>
+                  <p>Due date:</p>
+                </div>
+                <div class="ml-8 text-right">
+                  <p>#{{ invoice.id }}</p>
+                  <p>{{ new Date(invoice.created_at).toLocaleDateString() }}</p>
+                  <p>{{ dueDate }}</p>
+                </div>
+              </div>
+            </div>
             <div class="mt-8 sm:flex sm:items-start whitespace-no-wrap">
               <div class="w-1/2 sm:px-6">
                 <p class="text-sm text-gray-700 font-bold">To:</p>
@@ -248,6 +260,11 @@ export default {
   },
 
   computed: {
+    dueDate () {
+      const createDate = new Date(this.invoice.created_at)
+      createDate.setDate(createDate.getDate() + 30)
+      return createDate.toLocaleDateString()
+    },
     nextInvoiceStatus () {
       return this.invoice.status === 'Draft' ? 'Sent' : 'Paid'
     },
