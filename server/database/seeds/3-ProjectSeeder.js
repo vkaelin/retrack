@@ -11,7 +11,7 @@
 */
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-const Factory = use('Factory')
+// const Factory = use('Factory')
 const Project = use('App/Models/Project')
 
 class ProjectSeeder {
@@ -20,18 +20,21 @@ class ProjectSeeder {
       name: 'NBA Website',
       hourly_rate: 50,
       owner_id: 21,
+      client_id: 1,
     })
 
     await Project.create({
       name: 'Wikipedia rebrand',
       hourly_rate: 200,
       owner_id: 21,
+      client_id: 2,
     })
 
     await Project.create({
       name: 'Swiss Basketball mobile app',
       hourly_rate: 120,
       owner_id: 21,
+      client_id: 1,
     })
   }
 }

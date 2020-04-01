@@ -4,11 +4,15 @@
 const Model = use('Model')
 
 class Project extends Model {
+  client() {
+    return this.belongsTo('App/Models/Client', 'client_id')
+  }
+
   owner() {
     return this.belongsTo('App/Models/User', 'owner_id')
   }
 
-  tasks () {
+  tasks() {
     return this.hasMany('App/Models/Task')
   }
 }

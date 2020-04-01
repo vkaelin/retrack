@@ -26,6 +26,7 @@ class InvoiceController {
       const invoice = await Invoice.query()
         .where('id', params.id)
         .with('project')
+        .with('project.client')
         .with('project.tasks', (builder) => {
           builder.where('invoiced', false)
         })

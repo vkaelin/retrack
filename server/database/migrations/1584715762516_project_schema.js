@@ -12,6 +12,7 @@ class ProjectSchema extends Schema {
       table.string('name', 255)
       table.float('hourly_rate', 2)
 
+      table.integer('client_id').unsigned()
       table.integer('owner_id').unsigned().notNullable()
     })
   }

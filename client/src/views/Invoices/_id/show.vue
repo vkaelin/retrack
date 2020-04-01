@@ -193,7 +193,14 @@
               </div>
             </div>
             <div class="mt-8 sm:flex sm:items-start whitespace-no-wrap">
-              <div class="w-1/2 sm:px-6">
+              <div v-if="invoice.project.client" class="w-1/2 sm:px-6">
+                <p class="text-sm text-gray-700 font-bold">To:</p>
+                <p class="mt-2">{{ invoice.project.client.company }}</p>
+                <p>{{ invoice.project.client.street }}</p>
+                <p>{{ invoice.project.client.city }}</p>
+                <p>{{ invoice.project.client.country }}</p>
+              </div>
+              <div v-else class="w-1/2 sm:px-6">
                 <p class="text-sm text-gray-700 font-bold">To:</p>
                 <p class="mt-2">University of Somewhere</p>
                 <p>118 Bureaucracy Lane</p>
