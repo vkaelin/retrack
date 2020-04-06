@@ -12,7 +12,7 @@
                 <!-- <router-link
                   :to="{ name: 'tasks' }"
                   class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
-                >Tasks</router-link> -->
+                >Tasks</router-link>-->
                 <router-link
                   :to="{ name: 'projects' }"
                   class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
@@ -72,14 +72,14 @@
                     class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
                   >
                     <div class="py-1 rounded-md bg-white shadow-xs">
-                      <a
+                      <!-- <a
                         href="#"
                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      >Your Profile</a>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      >Settings</a>
+                      >Your Profile</a>-->
+                      <router-link
+                        :to="{name: 'settings'}"
+                        class="dropdown-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >Settings</router-link>
                       <a
                         @click="logout"
                         class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100"
@@ -188,12 +188,12 @@ export default {
 </script>
 
 <style scoped>
-.router-link-active {
+.router-link-active:not(.dropdown-link) {
   @apply bg-gray-900 text-white;
 }
 
-.router-link-active:hover,
-.router-link-active:focus {
+.router-link-active:hover:not(.dropdown-link),
+.router-link-active:focus:not(.dropdown-link) {
   @apply bg-gray-900;
 }
 </style>

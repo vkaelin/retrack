@@ -10,6 +10,12 @@ const mutations = {
   },
   SET_AUTHENTICATE_USER (state, user) {
     state.currentUser = user
+  },
+  UPDATE_SETTINGS (state, form) {
+    state.currentUser.company = form.company
+    state.currentUser.street = form.street
+    state.currentUser.city = form.city
+    state.currentUser.country = form.country
   }
 }
 
@@ -45,6 +51,9 @@ const actions = {
     } catch (e) {
       throw e
     }
+  },
+  updateSettings ({ commit }, form) {
+    commit('UPDATE_SETTINGS', form)
   }
 }
 

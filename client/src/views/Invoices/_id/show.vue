@@ -206,12 +206,24 @@
                 <p>118 Bureaucracy Lane</p>
                 <p>Cityville, CA 90210</p>
               </div>
-              <div class="w-1/2 sm:px-6">
+              <div v-if="currentUser.company" class="w-1/2 sm:px-6">
                 <p class="text-sm text-gray-700 font-bold">From:</p>
-                <p class="mt-2">Retrack Inc.</p>
-                <p>Very nice street 42</p>
-                <p>1000 Lausanne</p>
-                <p>Switzerland</p>
+                <p class="mt-2">{{ currentUser.company }}</p>
+                <p>{{ currentUser.street }}</p>
+                <p>{{ currentUser.city }}</p>
+                <p>{{ currentUser.country }}</p>
+              </div>
+              <div v-else class="w-1/2 sm:px-6">
+                <p class="text-sm text-gray-700 font-bold">From:</p>
+                <p class="mt-2">No address filled yet.</p>
+                <p>
+                  Please go to your
+                  <router-link
+                    :to="{ name: 'settings' }"
+                    class="text-indigo-500 font-semibold"
+                  >Settings page</router-link>
+                </p>
+                <p>to edit your information.</p>
               </div>
             </div>
             <table class="w-full mt-8">
@@ -252,6 +264,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
@@ -279,7 +292,8 @@ export default {
       return this.invoice.project.tasks.reduce((agg, task) => {
         return agg + task.actual_time * this.invoice.project.hourly_rate / 3600
       }, 0)
-    }
+    },
+    ...mapState('auth', ['currentUser'])
   },
 
   methods: {

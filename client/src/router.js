@@ -64,6 +64,14 @@ const router = new Router({
       meta: {
         layout: 'Visitor'
       }
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: () => import(/* webpackChunkName: "invoices" */ './views/Settings.vue'),
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })

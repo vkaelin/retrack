@@ -19,6 +19,12 @@ class UserController {
       user,
     })
   }
+
+  async update({ auth, request, response }) {
+    const payload = request.only(['company', 'street', 'city', 'country'])
+    await Persona.updateProfile(auth.user, payload)
+    return response.ok()
+  }
 }
 
 module.exports = UserController
