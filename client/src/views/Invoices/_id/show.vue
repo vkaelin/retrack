@@ -212,15 +212,17 @@
               </div>
               <div v-else class="w-1/2 sm:px-6">
                 <p class="text-sm text-gray-700 font-bold">From:</p>
-                <p class="mt-2">No address filled yet.</p>
-                <p>
-                  Please go to your
-                  <router-link
-                    :to="{ name: 'settings' }"
-                    class="text-indigo-500 font-semibold"
-                  >Settings page</router-link>
-                </p>
-                <p>to edit your information.</p>
+                <div class="mt-2 inline-block px-4 py-2 border-2 border-indigo-400 rounded-md">
+                  <p>No address filled yet.</p>
+                  <p>
+                    Please go to your
+                    <router-link
+                      :to="{ name: 'settings' }"
+                      class="text-indigo-500 font-semibold"
+                    >Settings page</router-link>
+                  </p>
+                  <p>to edit your information.</p>
+                </div>
               </div>
             </div>
             <table class="w-full mt-8">
