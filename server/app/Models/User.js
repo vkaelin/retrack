@@ -6,8 +6,10 @@ const Model = use('Model')
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash')
 
+const crypto = require('crypto')
+
 class User extends Model {
-  static boot () {
+  static boot() {
     super.boot()
 
     /**
@@ -17,6 +19,11 @@ class User extends Model {
     this.addHook('beforeSave', async (userInstance) => {
       if (userInstance.dirty.password) {
         userInstance.password = await Hash.make(userInstance.password)
+      }
+
+      // Update email hashed to display Gravatar icon
+      if (userInstance.dirty.email) {
+        userInstance.email_hashed = crypto.createHash('md5').update(userInstance.email).digest('hex')
       }
     })
   }
@@ -35,11 +42,11 @@ class User extends Model {
    *
    * @return {Object}
    */
-  tokens () {
+  tokens() {
     return this.hasMany('App/Models/Token')
   }
 
-  projects () {
+  projects() {
     return this.hasMany('App/Models/Project', 'id', 'owner_id')
   }
 }

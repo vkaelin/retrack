@@ -11,6 +11,7 @@ class UserSchema extends Schema {
 
       table.string('username', 80).notNullable().unique()
       table.string('email', 254).notNullable().unique()
+      table.string('email_hashed', 254)
       table.string('password', 60).notNullable()
       table.string('account_status')
       table.string('company')

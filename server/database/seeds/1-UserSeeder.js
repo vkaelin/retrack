@@ -22,7 +22,7 @@ class UserSeeder {
 
     await User.create({
       username: 'John',
-      email: 'john@doe.com',
+      email: 'johndoe@gmail.com',
       password: '1234'
     })
   }

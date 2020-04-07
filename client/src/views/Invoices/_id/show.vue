@@ -4,7 +4,7 @@
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-0">
         <div class="lg:flex lg:items-center lg:justify-between">
           <div>
-            <h2 class="text-3xl leading-9 font-bold text-white">
+            <h2 class="text-2xl leading-9 font-bold text-white sm:text-3xl">
               <router-link
                 :to="{name: 'invoices'}"
                 class="text-indigo-500 hover:text-indigo-400"
