@@ -46,48 +46,37 @@
                   />
                 </svg>
               </button>
-              <div class="ml-3 relative">
-                <div>
-                  <button
-                    @click="profileOpen = !profileOpen"
-                    class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid"
-                  >
+              <Dropdown
+                class="ml-3"
+                btn-classes="rounded-full text-white focus:shadow-solid"
+                content-classes="w-48"
+              >
+                <template v-slot:trigger>
+                  <div class="max-w-xs flex items-center text-sm">
                     <img
                       class="h-8 w-8 rounded-full"
                       src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                       alt
                     />
-                  </button>
-                </div>
-                <transition
-                  enter-active-class="transition ease-out duration-100"
-                  enter-class="transform opacity-0 scale-95"
-                  enter-to-class="transform opacity-100 scale-100"
-                  leave-active-class="transition ease-in duration-75"
-                  leave-class="transform opacity-100 scale-100"
-                  leave-to-class="transform opacity-0 scale-95"
-                >
-                  <div
-                    v-show="profileOpen"
-                    class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
-                  >
-                    <div class="py-1 rounded-md bg-white shadow-xs">
-                      <!-- <a
+                  </div>
+                </template>
+                <template>
+                  <div class="py-1 rounded-md bg-white shadow-xs">
+                    <!-- <a
                         href="#"
                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      >Your Profile</a>-->
-                      <router-link
-                        :to="{name: 'settings'}"
-                        class="dropdown-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      >Settings</router-link>
-                      <a
-                        @click="logout"
-                        class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100"
-                      >Sign out</a>
-                    </div>
+                    >Your Profile</a>-->
+                    <router-link
+                      :to="{name: 'settings'}"
+                      class="dropdown-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Settings</router-link>
+                    <a
+                      @click="logout"
+                      class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100"
+                    >Sign out</a>
                   </div>
-                </transition>
-              </div>
+                </template>
+              </Dropdown>
             </div>
           </div>
           <div class="-mr-2 flex md:hidden">
@@ -168,10 +157,15 @@
 </template>
 
 <script>
+import Dropdown from '@/components/Common/Dropdown.vue'
+
 export default {
+  components: {
+    Dropdown
+  },
+
   data () {
     return {
-      profileOpen: false,
       sideOpen: false
     }
   },

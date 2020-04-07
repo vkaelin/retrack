@@ -125,50 +125,47 @@
               </button>
             </span>
 
-            <span
+            <Dropdown
+              btn-classes="bg-gray-700 border border-transparent rounded-md hover:bg-gray-600 focus:shadow-outline-gray focus:border-gray-800 transition duration-150 ease-in-out"
+              content-classes="-ml-1 w-32"
+              position="left"
               :class="{'ml-3': invoice.status !== 'Paid'}"
-              class="relative shadow-sm rounded-md sm:hidden"
+              class="shadow-sm rounded-md sm:hidden"
             >
-              <button
-                @click="actionsOpen = !actionsOpen"
-                type="button"
-                class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600 focus:outline-none focus:shadow-outline-gray focus:border-gray-800 transition duration-150 ease-in-out"
-              >
-                More
-                <svg
-                  class="-mr-1 ml-2 h-5 w-5 text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </button>
-
-              <transition name="fade-scale">
+              <template v-slot:trigger>
                 <div
-                  v-show="actionsOpen"
-                  class="origin-top-left absolute left-0 mt-2 -ml-1 w-32 rounded-md shadow-lg"
+                  class="inline-flex items-center px-4 py-2 text-sm leading-5 font-medium text-white"
                 >
-                  <div class="py-1 rounded-md bg-white shadow-xs">
-                    <a
-                      href="#"
-                      class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                    >Edit</a>
-                    <button
-                      @click="downloadPDF"
-                      :disabled="isDownloading"
-                      :class="isDownloading ? 'bg-gray-200 cursor-default' : 'hover:bg-gray-100 focus:bg-gray-100'"
-                      type="button"
-                      class="block w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 focus:outline-none transition duration-150 ease-in-out"
-                    >Download</button>
-                  </div>
+                  More
+                  <svg
+                    class="-mr-1 ml-2 h-5 w-5 text-gray-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
                 </div>
-              </transition>
-            </span>
+              </template>
+              <template>
+                <div class="py-1 rounded-md bg-white shadow-xs">
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+                  >Edit</a>
+                  <button
+                    @click="downloadPDF"
+                    :disabled="isDownloading"
+                    :class="isDownloading ? 'bg-gray-200 cursor-default' : 'hover:bg-gray-100 focus:bg-gray-100'"
+                    type="button"
+                    class="block w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 focus:outline-none transition duration-150 ease-in-out"
+                  >Download</button>
+                </div>
+              </template>
+            </Dropdown>
           </div>
         </div>
       </div>
@@ -265,10 +262,15 @@
 
 <script>
 import { mapState } from 'vuex'
+import Dropdown from '@/components/Common/Dropdown.vue'
+
 export default {
+  components: {
+    Dropdown
+  },
+
   data () {
     return {
-      actionsOpen: false,
       invoice: {},
       isDownloading: false
     }
