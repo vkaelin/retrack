@@ -35,11 +35,13 @@ const actions = {
       throw e
     }
   },
-  async logout ({ commit }) {
+  async logout ({ commit, dispatch }) {
     try {
       await axios.delete('sessions')
 
       commit('LOGOUT')
+      // Remove projects from store
+      dispatch('project/deleteAll', {}, { root: true })
     } catch (e) {
       throw e
     }

@@ -11,6 +11,9 @@ const mutations = {
 }
 
 const actions = {
+  async deleteAll ({ commit }) {
+    commit('UPDATE_PROJECTS', [])
+  },
   async get ({ commit }) {
     const resp = await axios.get('projects').catch(e => console.log(e))
     commit('UPDATE_PROJECTS', resp.data)
