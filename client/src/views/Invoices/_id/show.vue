@@ -169,8 +169,18 @@
         </div>
       </div>
     </header>
-    <div class="max-w-4xl mx-auto pb-12 px-4 sm:px-6 lg:px-0">
-      <div ref="invoice" class="bg-white rounded-lg shadow text-gray-900 overflow-x-auto">
+    <div class="max-w-4xl mx-auto pb-12 px-4 overflow-x-auto sm:px-6 lg:px-0">
+      <div
+        ref="invoice"
+        class="relative bg-white rounded-lg shadow text-gray-900"
+        style="min-width: 620px;"
+      >
+        <img
+          :src="require(`@/assets/img/invoices/${invoice.status}.png`)"
+          class="stamp absolute w-28 pointer-events-none"
+          style="left: 40%; top: 30px;"
+          alt="Invoice status stamp"
+        />
         <div>
           <div class="mx-auto px-12 py-20" style="min-height: 1036px;">
             <div class="flex justify-between items-center pb-8 border-b border-gray-300">
@@ -304,7 +314,7 @@ export default {
       if (this.isDownloading) return
 
       this.isDownloading = true
-      const html = this.$refs.invoice.outerHTML.replace(/sm:|shadow/g, '')
+      const html = this.$refs.invoice.outerHTML.replace(/sm:|shadow/g, '').replace(/stamp/g, 'hidden')
       const resp = await this.$axios.post(`invoices/${this.$route.params.id}/print`, { html }, {
         responseType: 'arraybuffer',
         headers: {
