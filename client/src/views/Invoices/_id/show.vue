@@ -237,7 +237,7 @@
                 <tr v-for="(task, index) in invoice.project.tasks" :key="task.id">
                   <td
                     class="px-4 py-4 border-b border-gray-200 text-left"
-                  >{{ index + 1 }}. {{ task.name }}</td>
+                  >{{ index + 1 }}. {{ task.invoice_description }}</td>
                   <td
                     class="px-4 py-4 border-b border-gray-200 text-right"
                   >{{ task.actual_time|hours }}h</td>
