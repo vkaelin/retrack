@@ -1,16 +1,16 @@
 <template>
   <main class="-mt-64">
     <header class="py-10">
-      <div class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl leading-9 font-bold text-white">Invoice {{ invoice.id }}</h2>
+      <div class="flex items-center justify-between px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold leading-9 text-white">Invoice {{ invoice.id }}</h2>
         <div class="flex">
-          <span class="block shadow-sm rounded-md">
+          <span class="block rounded-md shadow-sm">
             <router-link
               :to="{ name: 'show-invoice', params: { id: $route.params.id } }"
-              class="inline-flex items-center px-4 py-2 bg-gray-700 text-white border border-transparent text-sm leading-5 font-medium rounded-md hover:bg-gray-600 focus:outline-none focus:shadow-outline-gray focus:border-gray-800 transition duration-150 ease-in-out"
+              class="inline-flex items-center px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-gray-700 border border-transparent rounded-md hover:bg-gray-600 focus:outline-none focus:shadow-outline-gray focus:border-gray-800"
             >
               <svg
-                class="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                class="w-5 h-5 mr-2 -ml-1 text-gray-400"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -25,13 +25,13 @@
           </span>
           <button
           @click="updateInvoice"
-            class="ml-3 bg-indigo-500 px-4 py-2 text-white text-sm font-medium leading-5 rounded-md shadow hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo transition duration-150 ease-in-out"
+            class="px-4 py-2 ml-3 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-indigo-500 rounded-md shadow hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo"
           >Save changes</button>
         </div>
       </div>
     </header>
-    <div class="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
-      <div class="bg-white rounded-lg shadow py-6"></div>
+    <div class="px-4 pb-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div class="py-6 bg-white rounded-lg shadow"></div>
     </div>
   </main>
 </template>

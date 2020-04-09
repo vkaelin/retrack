@@ -2,13 +2,13 @@
   <transition leave-active-class="duration-300">
     <div
       v-show="open"
-      class="fixed z-50 bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center"
+      class="fixed inset-x-0 bottom-0 z-50 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center"
     >
       <transition
-        enter-active-class="transition ease-out duration-300"
+        enter-active-class="transition duration-300 ease-out"
         enter-class="transform opacity-0"
         enter-to-class="transform opacity-100"
-        leave-active-class="transition ease-in duration-200"
+        leave-active-class="transition duration-200 ease-in"
         leave-class="transform opacity-100"
         leave-to-class="transform opacity-0"
       >
@@ -18,16 +18,16 @@
       </transition>
 
       <transition
-        enter-active-class="transition ease-out duration-300"
-        enter-class="transform opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-        enter-to-class="transform opacity-100 translate-y-0 sm:scale-100"
-        leave-active-class="transition ease-in duration-200"
-        leave-class="transform opacity-100 translate-y-0 sm:scale-100"
-        leave-to-class="transform opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        enter-active-class="transition duration-300 ease-out"
+        enter-class="transform translate-y-4 opacity-0 sm:translate-y-0 sm:scale-95"
+        enter-to-class="transform translate-y-0 opacity-100 sm:scale-100"
+        leave-active-class="transition duration-200 ease-in"
+        leave-class="transform translate-y-0 opacity-100 sm:scale-100"
+        leave-to-class="transform translate-y-4 opacity-0 sm:translate-y-0 sm:scale-95"
       >
         <div
           v-if="open"
-          class="relative bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl sm:max-w-sm sm:w-full sm:p-6"
+          class="relative px-4 pt-5 pb-4 overflow-hidden bg-white rounded-lg shadow-xl sm:max-w-sm sm:w-full sm:p-6"
         >
           <slot name="content" />
           <div class="mt-5 sm:mt-6">
@@ -35,7 +35,7 @@
               <button
                 @click="closeModal(true)"
                 type="button"
-                class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo sm:text-sm sm:leading-5"
               >
                 <slot name="button" />
               </button>

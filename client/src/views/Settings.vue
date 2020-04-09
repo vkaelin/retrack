@@ -1,19 +1,19 @@
 <template>
   <main class="-mt-64">
     <header class="py-10">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl leading-9 font-bold text-white">Settings</h2>
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold leading-9 text-white">Settings</h2>
       </div>
     </header>
-    <div class="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
-      <div class="bg-white rounded-lg shadow px-5 py-6 sm:px-6">
+    <div class="px-4 pb-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div class="px-5 py-6 bg-white rounded-lg shadow sm:px-6">
         <form @submit.prevent="updateSettings">
           <div>
             <div class>
               <div>
-                <h3 class="text-lg leading-6 font-medium text-gray-900">Personal Information</h3>
+                <h3 class="text-lg font-medium leading-6 text-gray-900">Personal Information</h3>
                 <p
-                  class="mt-1 max-w-2xl text-sm leading-5 text-gray-500"
+                  class="max-w-2xl mt-1 text-sm leading-5 text-gray-500"
                 >This information will be the default values when you create invoices.</p>
               </div>
               <div class="mt-6 sm:mt-5">
@@ -29,7 +29,7 @@
                       <input
                         v-model="form.company"
                         id="company"
-                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                        class="block w-full transition duration-150 ease-in-out form-input sm:text-sm sm:leading-5"
                       />
                     </div>
                   </div>
@@ -47,7 +47,7 @@
                       <input
                         v-model="form.street"
                         id="street"
-                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                        class="block w-full transition duration-150 ease-in-out form-input sm:text-sm sm:leading-5"
                       />
                     </div>
                   </div>
@@ -65,7 +65,7 @@
                       <input
                         v-model="form.city"
                         id="city"
-                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                        class="block w-full transition duration-150 ease-in-out form-input sm:text-sm sm:leading-5"
                       />
                     </div>
                   </div>
@@ -83,7 +83,7 @@
                       <input
                         v-model="form.country"
                         id="country"
-                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                        class="block w-full transition duration-150 ease-in-out form-input sm:text-sm sm:leading-5"
                       />
                     </div>
                   </div>
@@ -91,19 +91,19 @@
               </div>
             </div>
           </div>
-          <div class="mt-8 border-t border-gray-200 pt-5">
+          <div class="pt-5 mt-8 border-t border-gray-200">
             <div class="flex justify-end">
               <span class="inline-flex rounded-md shadow-sm">
                 <button
                   @click="fillOldValues()"
                   type="button"
-                  class="py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out"
+                  class="px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out border border-gray-300 rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800"
                 >Reset</button>
               </span>
-              <span class="ml-3 inline-flex rounded-md shadow-sm">
+              <span class="inline-flex ml-3 rounded-md shadow-sm">
                 <button
                   type="submit"
-                  class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-400 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                  class="inline-flex justify-center px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-indigo-500 border border-transparent rounded-md hover:bg-indigo-400 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
                 >Save</button>
               </span>
             </div>

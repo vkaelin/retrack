@@ -1,18 +1,18 @@
 <template>
   <main v-if="invoice.project" class="-mt-64">
     <header class="py-10">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-0">
+      <div class="max-w-4xl px-4 mx-auto sm:px-6 lg:px-0">
         <div class="lg:flex lg:items-center lg:justify-between">
           <div>
-            <h2 class="text-2xl leading-9 font-bold text-white sm:text-3xl">
+            <h2 class="text-2xl font-bold leading-9 text-white sm:text-3xl">
               <router-link
                 :to="{name: 'invoices'}"
                 class="text-indigo-500 hover:text-indigo-400"
               >Invoices /</router-link>
               Invoice {{ $route.params.id }}
             </h2>
-            <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap">
-              <div class="mt-2 flex items-center text-sm leading-5 text-gray-300 sm:mr-6">
+            <div class="flex flex-col mt-1 sm:mt-0 sm:flex-row sm:flex-wrap">
+              <div class="flex items-center mt-2 text-sm leading-5 text-gray-300 sm:mr-6">
                 <svg
                   class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-500"
                   fill="currentColor"
@@ -29,7 +29,7 @@
                 </svg>
                 {{ invoice.project.name }}
               </div>
-              <div class="mt-2 flex items-center text-sm leading-5 text-gray-300 sm:mr-6">
+              <div class="flex items-center mt-2 text-sm leading-5 text-gray-300 sm:mr-6">
                 <svg
                   class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-500"
                   fill="currentColor"
@@ -46,7 +46,7 @@
                 </svg>
                 {{ invoice.project.hourly_rate }}$/h
               </div>
-              <div class="mt-2 flex items-center text-sm leading-5 text-gray-300">
+              <div class="flex items-center mt-2 text-sm leading-5 text-gray-300">
                 <svg
                   class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-500"
                   fill="currentColor"
@@ -62,14 +62,14 @@
               </div>
             </div>
           </div>
-          <div class="mt-5 flex lg:mt-0 lg:ml-4">
-            <span class="hidden sm:block shadow-sm rounded-md">
+          <div class="flex mt-5 lg:mt-0 lg:ml-4">
+            <span class="hidden rounded-md shadow-sm sm:block">
               <router-link
                 :to="{ name: 'edit-invoice', params: { id: $route.params.id } }"
-                class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-gray-700 cursor-pointer hover:bg-gray-600 focus:outline-none focus:shadow-outline-gray focus:border-gray-800 transition duration-150 ease-in-out"
+                class="inline-flex items-center px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-gray-700 border border-transparent rounded-md cursor-pointer hover:bg-gray-600 focus:outline-none focus:shadow-outline-gray focus:border-gray-800"
               >
                 <svg
-                  class="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                  class="w-5 h-5 mr-2 -ml-1 text-gray-400"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -81,16 +81,16 @@
               </router-link>
             </span>
 
-            <span class="hidden sm:block ml-3 shadow-sm rounded-md">
+            <span class="hidden ml-3 rounded-md shadow-sm sm:block">
               <button
                 @click="downloadPDF"
                 :disabled="isDownloading"
                 :class="isDownloading ? 'bg-gray-800 border-gray-700 text-gray-400 cursor-default' : 'bg-gray-700 hover:bg-gray-600 text-white'"
                 type="button"
-                class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md focus:outline-none focus:shadow-outline-gray focus:border-gray-800 transition duration-150 ease-in-out"
+                class="inline-flex items-center px-4 py-2 text-sm font-medium leading-5 transition duration-150 ease-in-out border border-transparent rounded-md focus:outline-none focus:shadow-outline-gray focus:border-gray-800"
               >
                 <svg
-                  class="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                  class="w-5 h-5 mr-2 -ml-1 text-gray-400"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -106,14 +106,14 @@
 
             <span
               :class="{'hidden': invoice.status === 'Paid'}"
-              class="sm:ml-3 shadow-sm rounded-md"
+              class="rounded-md shadow-sm sm:ml-3"
             >
               <button
                 @click="updateInvoiceStatus"
                 type="button"
-                class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-600 transition duration-150 ease-in-out"
+                class="inline-flex items-center px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-indigo-500 border border-transparent rounded-md hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-600"
               >
-                <svg class="-ml-1 mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fill-rule="evenodd"
                     d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -129,15 +129,15 @@
               content-classes="-ml-1 w-32"
               position="left"
               :class="{'ml-3': invoice.status !== 'Paid'}"
-              class="shadow-sm rounded-md sm:hidden"
+              class="rounded-md shadow-sm sm:hidden"
             >
               <template v-slot:trigger>
                 <div
-                  class="inline-flex items-center px-4 py-2 text-sm leading-5 font-medium text-white"
+                  class="inline-flex items-center px-4 py-2 text-sm font-medium leading-5 text-white"
                 >
                   More
                   <svg
-                    class="-mr-1 ml-2 h-5 w-5 text-gray-400"
+                    class="w-5 h-5 ml-2 -mr-1 text-gray-400"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -150,17 +150,17 @@
                 </div>
               </template>
               <template>
-                <div class="py-1 rounded-md bg-white shadow-xs">
+                <div class="py-1 bg-white rounded-md shadow-xs">
                   <router-link
                     :to="{ name: 'edit-invoice', params: { id: $route.params.id } }"
-                    class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+                    class="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                   >Edit</router-link>
                   <button
                     @click="downloadPDF"
                     :disabled="isDownloading"
                     :class="isDownloading ? 'bg-gray-200 cursor-default' : 'hover:bg-gray-100 focus:bg-gray-100'"
                     type="button"
-                    class="block w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 focus:outline-none transition duration-150 ease-in-out"
+                    class="block w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 transition duration-150 ease-in-out focus:outline-none"
                   >Download</button>
                 </div>
               </template>
@@ -169,24 +169,24 @@
         </div>
       </div>
     </header>
-    <div class="max-w-4xl mx-auto pb-12 px-4 overflow-x-auto sm:px-6 lg:px-0">
+    <div class="max-w-4xl px-4 pb-12 mx-auto overflow-x-auto sm:px-6 lg:px-0">
       <div
         ref="invoice"
-        class="relative bg-white rounded-lg shadow text-gray-900"
+        class="relative text-gray-900 bg-white rounded-lg shadow"
         style="min-width: 620px;"
       >
         <img
           :src="require(`@/assets/img/invoices/${invoice.status}.png`)"
-          class="stamp absolute w-28 pointer-events-none"
+          class="absolute pointer-events-none stamp w-28"
           style="left: 40%; top: 30px;"
           alt="Invoice status stamp"
         />
         <div>
-          <div class="mx-auto px-12 py-20" style="min-height: 1036px;">
-            <div class="flex justify-between items-center pb-8 border-b border-gray-300">
-              <h1 class="text-3xl text-gray-500 font-bold uppercase leading-none">Invoice</h1>
+          <div class="px-12 py-20 mx-auto" style="min-height: 1036px;">
+            <div class="flex items-center justify-between pb-8 border-b border-gray-300">
+              <h1 class="text-3xl font-bold leading-none text-gray-500 uppercase">Invoice</h1>
               <div class="flex items-center px-4 text-sm text-gray-700">
-                <div class="text-left font-bold">
+                <div class="font-bold text-left">
                   <p>Invoice No:</p>
                   <p>Invoice date:</p>
                   <p>Due date:</p>
@@ -198,36 +198,36 @@
                 </div>
               </div>
             </div>
-            <div class="mt-8 sm:flex sm:items-start whitespace-no-wrap">
+            <div class="mt-8 whitespace-no-wrap sm:flex sm:items-start">
               <div v-if="invoice.project.client" class="w-1/2 sm:px-6">
-                <p class="text-sm text-gray-700 font-bold">To:</p>
+                <p class="text-sm font-bold text-gray-700">To:</p>
                 <p class="mt-2">{{ invoice.project.client.company }}</p>
                 <p>{{ invoice.project.client.street }}</p>
                 <p>{{ invoice.project.client.city }}</p>
                 <p>{{ invoice.project.client.country }}</p>
               </div>
               <div v-else class="w-1/2 sm:px-6">
-                <p class="text-sm text-gray-700 font-bold">To:</p>
+                <p class="text-sm font-bold text-gray-700">To:</p>
                 <p class="mt-2">University of Somewhere</p>
                 <p>118 Bureaucracy Lane</p>
                 <p>Cityville, CA 90210</p>
               </div>
               <div v-if="currentUser.company" class="w-1/2 sm:px-6">
-                <p class="text-sm text-gray-700 font-bold">From:</p>
+                <p class="text-sm font-bold text-gray-700">From:</p>
                 <p class="mt-2">{{ currentUser.company }}</p>
                 <p>{{ currentUser.street }}</p>
                 <p>{{ currentUser.city }}</p>
                 <p>{{ currentUser.country }}</p>
               </div>
               <div v-else class="w-1/2 sm:px-6">
-                <p class="text-sm text-gray-700 font-bold">From:</p>
-                <div class="mt-2 inline-block px-4 py-2 border-2 border-indigo-400 rounded-md">
+                <p class="text-sm font-bold text-gray-700">From:</p>
+                <div class="inline-block px-4 py-2 mt-2 border-2 border-indigo-400 rounded-md">
                   <p>No address filled yet.</p>
                   <p>
                     Please go to your
                     <router-link
                       :to="{ name: 'settings' }"
-                      class="text-indigo-500 font-semibold"
+                      class="font-semibold text-indigo-500"
                     >Settings page</router-link>
                   </p>
                   <p>to edit your information.</p>
@@ -237,28 +237,28 @@
             <table class="w-full mt-8">
               <thead>
                 <tr>
-                  <th class="px-4 py-4 border-b border-gray-200 text-left">Description</th>
-                  <th class="px-4 py-4 border-b border-gray-200 text-right">Hours</th>
-                  <th class="px-4 py-4 border-b border-gray-200 text-right">Amount</th>
+                  <th class="px-4 py-4 text-left border-b border-gray-200">Description</th>
+                  <th class="px-4 py-4 text-right border-b border-gray-200">Hours</th>
+                  <th class="px-4 py-4 text-right border-b border-gray-200">Amount</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="(task, index) in invoice.project.tasks" :key="task.id">
                   <td
-                    class="px-4 py-4 border-b border-gray-200 text-left"
+                    class="px-4 py-4 text-left border-b border-gray-200"
                   >{{ index + 1 }}. {{ task.invoice_description }}</td>
                   <td
-                    class="px-4 py-4 border-b border-gray-200 text-right"
+                    class="px-4 py-4 text-right border-b border-gray-200"
                   >{{ task.actual_time|hours }}h</td>
                   <td
-                    class="px-4 py-4 border-b border-gray-200 text-right"
+                    class="px-4 py-4 text-right border-b border-gray-200"
                   >{{ task.actual_time*invoice.project.hourly_rate/3600|round(2) }}$</td>
                 </tr>
                 <tr>
                   <td class="border-b border-gray-200"></td>
-                  <td class="border-b border-gray-200 px-4 py-4 text-right font-bold">Total</td>
+                  <td class="px-4 py-4 font-bold text-right border-b border-gray-200">Total</td>
                   <td
-                    class="border-b border-gray-200 px-4 py-4 text-right font-bold"
+                    class="px-4 py-4 font-bold text-right border-b border-gray-200"
                   >${{ totalPrice|round(2) }}</td>
                 </tr>
               </tbody>

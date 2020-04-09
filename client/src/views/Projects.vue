@@ -1,15 +1,15 @@
 <template>
   <main class="-mt-64">
     <header class="py-10">
-      <div class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl leading-9 font-bold text-white">Projects</h2>
+      <div class="flex items-center justify-between px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold leading-9 text-white">Projects</h2>
         <button
-          class="bg-indigo-500 px-6 py-3 text-white font-medium leading-6 rounded-md shadow hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo transition duration-150 ease-in-out"
+          class="px-6 py-3 font-medium leading-6 text-white transition duration-150 ease-in-out bg-indigo-500 rounded-md shadow hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo"
         >Create project</button>
       </div>
     </header>
-    <div class="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
-      <div class="bg-white rounded-lg shadow px-5 py-6 sm:px-6">
+    <div class="px-4 pb-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div class="px-5 py-6 bg-white rounded-lg shadow sm:px-6">
         <div
           v-for="(project, index) in projects"
           :key="project.id"

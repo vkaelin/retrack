@@ -2,8 +2,8 @@
   <Modal :default-state="defaultState" @close="closeModal">
     <template v-slot:content>
       <div>
-        <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-          <svg fill="currentColor" viewBox="0 0 20 20" class="h-8 w-8 text-green-600">
+        <div class="flex items-center justify-center w-12 h-12 mx-auto bg-green-100 rounded-full">
+          <svg fill="currentColor" viewBox="0 0 20 20" class="w-8 h-8 text-green-600">
             <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
             <path
               fill-rule="evenodd"
@@ -13,7 +13,7 @@
           </svg>
         </div>
         <div class="mt-3 text-center sm:mt-5">
-          <h3 class="text-lg leading-6 font-medium text-gray-900">Create Invoice</h3>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Create Invoice</h3>
           <div class="mt-2">
             <p
               class="text-sm leading-5 text-gray-500"
@@ -32,7 +32,7 @@
               <select
                 v-model="form.project"
                 id="project"
-                class="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                class="block w-full transition duration-150 ease-in-out form-select sm:text-sm sm:leading-5"
               >
                 <option
                   v-for="project in projects"
