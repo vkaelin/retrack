@@ -64,10 +64,9 @@
           </div>
           <div class="mt-5 flex lg:mt-0 lg:ml-4">
             <span class="hidden sm:block shadow-sm rounded-md">
-              <button
-                @click="updateInvoice"
-                type="button"
-                class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600 focus:outline-none focus:shadow-outline-gray focus:border-gray-800 transition duration-150 ease-in-out"
+              <router-link
+                :to="{ name: 'edit-invoice', params: { id: $route.params.id } }"
+                class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-gray-700 cursor-pointer hover:bg-gray-600 focus:outline-none focus:shadow-outline-gray focus:border-gray-800 transition duration-150 ease-in-out"
               >
                 <svg
                   class="-ml-1 mr-2 h-5 w-5 text-gray-400"
@@ -79,7 +78,7 @@
                   />
                 </svg>
                 Edit
-              </button>
+              </router-link>
             </span>
 
             <span class="hidden sm:block ml-3 shadow-sm rounded-md">
@@ -152,10 +151,10 @@
               </template>
               <template>
                 <div class="py-1 rounded-md bg-white shadow-xs">
-                  <a
-                    href="#"
+                  <router-link
+                    :to="{ name: 'edit-invoice', params: { id: $route.params.id } }"
                     class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                  >Edit</a>
+                  >Edit</router-link>
                   <button
                     @click="downloadPDF"
                     :disabled="isDownloading"
@@ -340,11 +339,6 @@ export default {
           message: 'Error while updating the invoice.'
         })
       }
-    },
-
-    async updateInvoice () {
-      console.log('update invoice')
-      // await this.$axios.put(`invoices/${this.$route.params.id}`, this.invoice).catch(e => console.log(e))
     }
   }
 }

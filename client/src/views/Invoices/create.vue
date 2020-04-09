@@ -51,7 +51,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import Modal from '@/components/Modal.vue'
+import Modal from '@/components/Common/Modal.vue'
 
 export default {
   props: {
