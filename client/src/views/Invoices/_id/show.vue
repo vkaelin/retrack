@@ -305,7 +305,7 @@ export default {
       if (this.isDownloading) return
 
       this.isDownloading = true
-      const html = this.$refs.invoice.outerHTML.replace(/sm:/g, '')
+      const html = this.$refs.invoice.outerHTML.replace(/sm:|shadow/g, '')
       const resp = await this.$axios.post(`invoices/${this.$route.params.id}/print`, { html }, {
         responseType: 'arraybuffer',
         headers: {
