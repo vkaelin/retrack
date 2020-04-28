@@ -1,5 +1,5 @@
 # Ado-auth
-Projet de Pré-TPI 2020 à l'ETML
+Projet de Pré-TPI 2020 à l'ETML - Valentin Kaelin
 
 ## Installation
 
@@ -39,7 +39,7 @@ La configuration de base du fichier **.env** devrait suffire à établir la conn
 
 Cependant, si vous voulez changer les valeurs par défaut, vous pouvez modifier les valeurs **DB_DATABASE** (pour le nom de la base de données), **DB_USER** et **DB_PASSWORD** (pour le nom et mot de passe de l'utilisateur).
 
-Apres avoir modifié les inforrmations de la base de données, il faut la remplir à l'aide des commandes suivantes, toujours dans le dossier **server**:
+Apres avoir modifié les informations de la base de données, il faut la remplir de contenu fictif à l'aide des commandes suivantes, toujours dans le dossier **server**:
 
 ```bash
 > node ace migration:run
@@ -76,4 +76,4 @@ email: johndoe@gmail.com
 mot de passe: 1234
 ```
 
-Le compte dispose de quelques projects avec des tâches fictives. Il est possible de créer une facture pour l'un de ces projets (seul le projet NBA Website contient des tâches).
+Le compte dispose de quelques projects avec des tâches fictives. Il est possible de créer une facture pour l'un de ces projets (seul le projet **NBA Website** contient des tâches).
