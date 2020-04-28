@@ -244,7 +244,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(task, index) in invoice.project.tasks" :key="task.id">
+                <tr v-for="(task, index) in invoice.tasks" :key="task.id">
                   <td
                     class="px-4 py-4 text-left border-b border-gray-200"
                   >{{ index + 1 }}. {{ task.invoice_description }}</td>
@@ -304,7 +304,7 @@ export default {
       return this.invoice.status === 'Draft' ? 'Sent' : 'Paid'
     },
     totalPrice () {
-      return this.invoice.project.tasks.reduce((agg, task) => {
+      return this.invoice.tasks.reduce((agg, task) => {
         return agg + task.actual_time * this.invoice.project.hourly_rate / 3600
       }, 0)
     },

@@ -2,6 +2,7 @@
 
 const puppeteer = require('puppeteer')
 const Invoice = use('App/Models/Invoice')
+const Task = use('App/Models/Task')
 
 class InvoiceController {
   async index({ auth, response }) {
@@ -14,10 +15,21 @@ class InvoiceController {
 
   async create({ auth, request, response }) {
     const projectId = request.input('project')
-    await Invoice.create({
+    const invoice = await Invoice.create({
       project_id: projectId,
       owner_id: auth.user.id
     })
+
+    // Add invoiceId to tasks
+    await Task
+    .query()
+    .where('project_id', projectId)
+    .where('invoiced', false)
+    .update({
+      invoice_id: invoice.id,
+      invoiced: true
+    })
+
     return response.ok()
   }
 
@@ -26,10 +38,11 @@ class InvoiceController {
       const invoice = await Invoice.query()
         .where('id', params.id)
         .with('project')
+        .with('tasks')
         .with('project.client')
-        .with('project.tasks', (builder) => {
-          builder.where('invoiced', false)
-        })
+        // .with('project.tasks', (builder) => {
+        //   builder.where('invoiced', false)
+        // })
         .firstOrFail()
 
       if (invoice.owner_id !== auth.user.id) {
