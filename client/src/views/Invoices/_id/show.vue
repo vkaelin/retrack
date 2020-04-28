@@ -169,10 +169,11 @@
         </div>
       </div>
     </header>
-    <div class="max-w-4xl px-4 pb-12 mx-auto overflow-x-auto sm:px-6 lg:px-0">
-      <div
+    <div class="max-w-4xl px-4 pb-12 mx-auto sm:px-6 lg:px-0">
+      <div class="overflow-x-auto shadow-lg">
+        <div
         ref="invoice"
-        class="relative text-gray-900 bg-white rounded-lg shadow"
+        class="relative text-gray-900 bg-white rounded-lg shadow-xs"
         style="min-width: 620px;"
       >
         <img
@@ -267,6 +268,7 @@
           </div>
         </div>
       </div>
+      </div>
     </div>
   </main>
 </template>
@@ -314,7 +316,7 @@ export default {
       if (this.isDownloading) return
 
       this.isDownloading = true
-      const html = this.$refs.invoice.outerHTML.replace(/sm:|shadow/g, '').replace(/stamp/g, 'hidden')
+      const html = this.$refs.invoice.outerHTML.replace(/sm:|shadow-xs/g, '').replace(/stamp/g, 'hidden')
       const resp = await this.$axios.post(`invoices/${this.$route.params.id}/print`, { html }, {
         responseType: 'arraybuffer',
         headers: {
