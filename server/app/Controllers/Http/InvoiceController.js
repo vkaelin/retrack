@@ -22,13 +22,13 @@ class InvoiceController {
 
     // Add invoiceId to tasks
     await Task
-    .query()
-    .where('project_id', projectId)
-    .where('invoiced', false)
-    .update({
-      invoice_id: invoice.id,
-      invoiced: true
-    })
+      .query()
+      .where('project_id', projectId)
+      .where('invoiced', false)
+      .update({
+        invoice_id: invoice.id,
+        invoiced: true
+      })
 
     return response.ok()
   }
@@ -55,8 +55,19 @@ class InvoiceController {
     }
   }
 
-  async update({ auth, request, response }) {
+  async update({ auth, request, params, response }) {
+    const invoice = request.input('invoice')
+    const tasks = request.input('tasks')
 
+    delete invoice.project
+    delete invoice.tasks
+
+    await Invoice
+      .query()
+      .where('id', params.id)
+      .update(invoice)
+
+    return response.ok()
   }
 
   async status({ request, params, response }) {
@@ -77,12 +88,12 @@ class InvoiceController {
     const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
     await page.setContent(request.input('html'))
-    await page.addStyleTag({ url: 'https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.2.0/tailwind.min.css'})
+    await page.addStyleTag({ url: 'https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.3.5/tailwind.min.css' })
     const pdf = await page.pdf({ format: 'A4' })
 
     response.type('application/pdf')
     response.send(pdf)
-    
+
     await browser.close()
   }
 }

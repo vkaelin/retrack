@@ -10,6 +10,8 @@ class InvoiceSchema extends Schema {
       table.timestamps()
 
       table.string('status').defaultTo('Draft')
+      table.integer('number')
+      table.string('remark').defaultTo('All prices in USD.')
 
       table.integer('project_id').unsigned().notNullable()
       table.integer('owner_id').unsigned().notNullable()

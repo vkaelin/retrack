@@ -1,0 +1,37 @@
+/* Btn primary */
+.btn-primary {
+  @apply px-6 py-3 font-medium leading-6 text-white transition duration-150 ease-in-out bg-indigo-500 border border-transparent rounded-md;
+}
+
+.btn-primary-sm {
+  @apply px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-indigo-500 border border-transparent rounded-md;
+}
+
+.btn-primary:hover,
+.btn-primary-sm:hover {
+  @apply bg-indigo-400;
+}
+
+.btn-primary:focus,
+.btn-primary-sm:focus {
+  @apply border-indigo-600 outline-none shadow-outline-indigo;
+}
+
+/* Btn Secondary */
+.btn-secondary {
+  @apply px-6 py-3 font-medium leading-6 text-white transition duration-150 ease-in-out bg-gray-700 border border-transparent rounded-md;
+}
+
+.btn-secondary-sm {
+  @apply px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-gray-700 border border-transparent rounded-md;
+}
+
+.btn-secondary:hover,
+.btn-secondary-sm:hover {
+  @apply bg-gray-600;
+}
+
+.btn-secondary:focus,
+.btn-secondary-sm:focus {
+  @apply border-gray-800 outline-none shadow-outline-gray;
+}

@@ -16,7 +16,7 @@
       <div
         v-show="isOpen"
         :class="[contentClasses, contentPosition]"
-        class="absolute mt-2 rounded-md shadow-lg"
+        class="absolute z-30 mt-2 rounded-md shadow-lg"
       >
         <slot></slot>
       </div>

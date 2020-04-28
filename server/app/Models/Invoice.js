@@ -4,6 +4,16 @@
 const Model = use('Model')
 
 class Invoice extends Model {
+  static boot() {
+    super.boot()
+
+    // Default Invoice number is its id
+    this.addHook('afterCreate', async (invoiceInstance) => {
+      invoiceInstance.number = invoiceInstance.id
+      await invoiceInstance.save()
+    })
+  }
+
   owner() {
     return this.belongsTo('App/Models/User', 'owner_id')
   }

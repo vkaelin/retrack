@@ -9,7 +9,7 @@
                 :to="{name: 'invoices'}"
                 class="text-indigo-500 hover:text-indigo-400"
               >Invoices /</router-link>
-              Invoice {{ $route.params.id }}
+              Invoice {{ invoice.number }}
             </h2>
             <div class="flex flex-col mt-1 sm:mt-0 sm:flex-row sm:flex-wrap">
               <div class="flex items-center mt-2 text-sm leading-5 text-gray-300 sm:mr-6">
@@ -66,7 +66,7 @@
             <span class="hidden rounded-md shadow-sm sm:block">
               <router-link
                 :to="{ name: 'edit-invoice', params: { id: $route.params.id } }"
-                class="inline-flex items-center px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-gray-700 border border-transparent rounded-md cursor-pointer hover:bg-gray-600 focus:outline-none focus:shadow-outline-gray focus:border-gray-800"
+                class="inline-flex items-center btn-secondary-sm"
               >
                 <svg
                   class="w-5 h-5 mr-2 -ml-1 text-gray-400"
@@ -111,7 +111,7 @@
               <button
                 @click="updateInvoiceStatus"
                 type="button"
-                class="inline-flex items-center px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-indigo-500 border border-transparent rounded-md hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-600"
+                class="inline-flex items-center btn-primary-sm"
               >
                 <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20">
                   <path
@@ -193,7 +193,7 @@
                   <p>Due date:</p>
                 </div>
                 <div class="ml-8 text-right">
-                  <p>#{{ invoice.id }}</p>
+                  <p>#{{ invoice.number }}</p>
                   <p>{{ new Date(invoice.created_at).toLocaleDateString() }}</p>
                   <p>{{ dueDate }}</p>
                 </div>
@@ -264,7 +264,7 @@
                 </tr>
               </tbody>
             </table>
-            <div class="mt-8 text-center text-gray-700">All prices in USD.</div>
+            <div class="mt-8 text-center text-gray-700">{{ invoice.remark }}</div>
           </div>
         </div>
       </div>
