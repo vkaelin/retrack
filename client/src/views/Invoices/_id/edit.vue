@@ -1,5 +1,5 @@
 <template>
-  <main class="-mt-64">
+  <main v-if="invoice.id" class="-mt-64">
     <header class="py-10">
       <div class="flex items-center justify-between px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <h2 class="text-3xl font-bold leading-9 text-white">Invoice {{ invoice.number }}</h2>
@@ -23,27 +23,18 @@
               Cancel
             </router-link>
           </span>
-          <button
-          @click="updateInvoice"
-            class="ml-3 btn-primary-sm"
-          >Save changes</button>
+          <button @click="updateInvoice" class="ml-3 btn-primary-sm">Save changes</button>
         </div>
       </div>
     </header>
 
     <div class="px-4 pb-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div v-if="invoice.project" class="overflow-x-auto shadow-lg">
+      <div class="overflow-x-auto shadow-lg">
         <div
           ref="invoice"
-          class="relative text-gray-900 bg-white rounded-lg shadow-xs"
+          class="text-gray-900 bg-white rounded-lg shadow-xs"
           style="min-width: 620px;"
         >
-          <img
-            :src="require(`@/assets/img/invoices/${invoice.status}.png`)"
-            class="absolute pointer-events-none stamp w-28"
-            style="left: 40%; top: 30px;"
-            alt="Invoice status stamp"
-          />
           <div>
             <div class="px-12 py-20 mx-auto">
               <div class="flex items-center justify-between pb-8 border-b border-gray-300">
@@ -57,9 +48,9 @@
                   <div class="ml-8 text-right">
                     <!-- <p>#{{ invoice.number }}</p> -->
                     <input
-                      class="inline-flex w-16 text-right invisible-input"
-                      type="text"
                       v-model="invoice.number"
+                      class="inline-flex w-16 text-right invisible-input"
+                      type="number"
                     />
                     <p>{{ new Date(invoice.created_at).toLocaleDateString() }}</p>
                     <p>{{ dueDate }}</p>
@@ -72,21 +63,80 @@
                     <th class="px-4 py-4 text-left border-b border-gray-200">Description</th>
                     <th class="px-4 py-4 text-right border-b border-gray-200">Hours</th>
                     <th class="px-4 py-4 text-right border-b border-gray-200">Amount</th>
+                    <th class="px-4 py-4 text-right border-b border-gray-200"></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(task, index) in invoice.tasks" :key="task.id">
-                    <td
-                      class="px-4 py-4 text-left border-b border-gray-200"
-                    >{{ index + 1 }}. {{ task.invoice_description }}</td>
+                  <tr v-for="(task, index) in displayedTasks" :key="index + 'task'">
+                    <td class="px-4 py-4 text-left border-b border-gray-200">
+                      <div class="flex items-center">
+                        <div>{{ index + 1 }}.</div>
+                        <div class="flex-1 ml-1">
+                          <input
+                            v-model="task.invoice_description"
+                            class="w-full invisible-input"
+                            type="text"
+                          />
+                        </div>
+                      </div>
+                    </td>
                     <td
                       class="px-4 py-4 text-right border-b border-gray-200"
                     >{{ task.actual_time|hours }}h</td>
                     <td
                       class="px-4 py-4 text-right border-b border-gray-200"
-                    >{{ task.actual_time*invoice.project.hourly_rate/3600|round(2) }}$</td>
+                    >{{ task.actual_time*project.hourly_rate/3600|round(2) }}$</td>
+                    <td class="px-4 py-4 text-right border-b border-gray-200">
+                      <button
+                        @click="deleteTask(task.id)"
+                        class="text-gray-700 hover:text-gray-900 focus:outline-none focus:text-gray-900"
+                        type="button"
+                      >
+                        <svg
+                          class="w-6 h-6"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                          />
+                        </svg>
+                      </button>
+                    </td>
                   </tr>
                   <tr>
+                    <td class="px-4 py-4">
+                      <button
+                        @click="addTask"
+                        type="button"
+                        class="flex items-center text-indigo-600 hover:text-indigo-500 focus:outline-none focus:text-indigo-500"
+                      >
+                        <div>
+                          <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        </div>
+                        <div class="ml-2 font-semibold">Add one task</div>
+                      </button>
+                    </td>
+                    <td class="px-4 py-4"></td>
+                    <td class="px-4 py-4"></td>
+                    <td class="px-4 py-4"></td>
+                  </tr>
+                  <tr>
+                    <td class="border-b border-gray-200"></td>
                     <td class="border-b border-gray-200"></td>
                     <td class="px-4 py-4 font-bold text-right border-b border-gray-200">Total</td>
                     <td
@@ -95,7 +145,9 @@
                   </tr>
                 </tbody>
               </table>
-              <div class="mt-8 text-center text-gray-700">{{ invoice.remark }}</div>
+              <div class="mt-8 text-center text-gray-700">
+                <input v-model="invoice.remark" class="invisible-input" type="text" />
+              </div>
             </div>
           </div>
         </div>
@@ -108,36 +160,67 @@
 export default {
   data () {
     return {
-      initialInvoice: {},
-      invoice: {}
+      invoice: {},
+      project: {},
+      tasks: []
     }
   },
 
   computed: {
+    displayedTasks () {
+      return this.tasks.filter(t => t.status !== 'deleted')
+    },
     dueDate () {
       const createDate = new Date(this.invoice.created_at)
       createDate.setDate(createDate.getDate() + 30)
       return createDate.toLocaleDateString()
     },
     totalPrice () {
-      return this.invoice.tasks.reduce((agg, task) => {
-        return agg + task.actual_time * this.invoice.project.hourly_rate / 3600
+      return this.tasks.reduce((agg, task) => {
+        return agg + task.actual_time * this.project.hourly_rate / 3600
       }, 0)
     }
   },
 
   async created () {
-    const resp = await this.$axios.get(`invoices/${this.$route.params.id}`).catch(e => console.log(e))
-    this.initialInvoice = resp.data
-    this.invoice = resp.data
+    try {
+      const resp = await this.$axios.get(`invoices/${this.$route.params.id}`)
+      this.tasks = resp.data.tasks
+      this.project = resp.data.project
+
+      delete resp.data.tasks
+      delete resp.data.project
+
+      this.invoice = resp.data
+    } catch (error) {
+      this.$store.dispatch('notification/add', {
+        type: 'error',
+        title: 'Error!',
+        message: 'Invoice not found.'
+      })
+    }
   },
 
   methods: {
+    addTask () {
+      const tmpId = this.tasks.length ? (this.tasks.reduce((a, b) => a.id > b.id ? a : b).id + 1) : 0
+      this.tasks.push({
+        id: tmpId,
+        status: 'new',
+        actual_time: 0,
+        invoice_description: 'Edit your new task'
+      })
+    },
+    deleteTask (id) {
+      const index = this.tasks.findIndex(t => t.id === id)
+      this.tasks[index].status = 'deleted'
+      this.$set(this.tasks, index, this.tasks[index])
+    },
     async updateInvoice () {
       console.log('update invoice')
       const data = {
         invoice: this.invoice,
-        tasks: this.invoice.tasks
+        tasks: this.tasks
       }
 
       try {

@@ -59,9 +59,53 @@ class InvoiceController {
     const invoice = request.input('invoice')
     const tasks = request.input('tasks')
 
-    delete invoice.project
-    delete invoice.tasks
+    // Update Tasks
+    const tasksToCreate = []
+    const tasksToUpdate = []
+    const tasksToDelete = []
 
+    for (const task of tasks) {
+      switch (task.status) {
+        case 'new':
+          tasksToCreate.push(task)
+          break
+        case 'deleted':
+          tasksToDelete.push(task.id)
+          break
+        default:
+          tasksToUpdate.push(task)
+          break
+      }
+    }
+
+    // Create new tasks
+    tasksToCreate.forEach(task => {
+      task.invoice_id = invoice.id
+      task.name = task.invoice_description
+      task.project_id = invoice.project_id
+      task.invoiced = true
+
+      delete task.status
+      delete task.id
+    })
+    await Task.createMany(tasksToCreate)
+
+    // Update existing tasks
+    const updates = tasksToUpdate.map((task) => {
+      return Task
+        .query()
+        .where('id', task.id)
+        .update(task)
+    })
+    await Promise.all(updates)
+
+    // Delete tasks
+    await Task
+      .query()
+      .whereIn('id', tasksToDelete)
+      .delete()
+
+    // Update Invoice
     await Invoice
       .query()
       .where('id', params.id)
