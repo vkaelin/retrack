@@ -14,3 +14,15 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.invisible-input {
+  @apply rounded-sm;
+}
+
+.invisible-input:hover {
+  @apply bg-gray-300;
+}
+
+.invisible-input:focus {
+  @apply bg-white;
+}

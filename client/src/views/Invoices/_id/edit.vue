@@ -57,7 +57,7 @@
                   </div>
                 </div>
               </div>
-              <table class="w-full mt-8">
+              <table class="w-full mt-8 table-fixed">
                 <thead>
                   <tr>
                     <th class="px-4 py-4 text-left border-b border-gray-200">Description</th>
@@ -80,9 +80,9 @@
                         </div>
                       </div>
                     </td>
-                    <td
-                      class="px-4 py-4 text-right border-b border-gray-200"
-                    >{{ task.actual_time|hours }}h</td>
+                    <td class="px-4 py-4 text-right border-b border-gray-200">
+                      <InputHours :id="task.id" :time="task.actual_time" @input="updateTaskHours" />
+                    </td>
                     <td
                       class="px-4 py-4 text-right border-b border-gray-200"
                     >{{ task.actual_time*project.hourly_rate/3600|round(2) }}$</td>
@@ -157,7 +157,13 @@
 </template>
 
 <script>
+import InputHours from '@/components/Invoices/InputHours.vue'
+
 export default {
+  components: {
+    InputHours
+  },
+
   data () {
     return {
       invoice: {},
@@ -238,21 +244,29 @@ export default {
           message: 'Error while updating the invoice.'
         })
       }
+    },
+    updateTaskHours ({ secs, id }) {
+      const index = this.tasks.findIndex(t => t.id === id)
+      this.tasks[index].actual_time = secs
     }
   }
 }
 </script>
 
 <style scoped>
-.invisible-input {
-  @apply rounded-sm;
+.w-desc {
+  width: 60%;
 }
 
-.invisible-input:hover {
-  @apply bg-gray-300;
+.w-hours {
+  width: 10%;
 }
 
-.invisible-input:focus {
-  @apply bg-white;
+.w-amount {
+  width: 20%;
+}
+
+.w-delete {
+  width: 10%;
 }
 </style>
