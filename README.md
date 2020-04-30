@@ -31,8 +31,9 @@ Positionnez-vous à l'emplacement souhaité pour cloner le projet sur votre ordi
 # Puis
 
 > cd ../server
+> npm i -g @adonisjs/cli
 > npm install
-> cp .env.example .env
+> copy .env.example .env
 ```
 
 La configuration de base du fichier **.env** devrait suffire à établir la connexion à la base de données.
@@ -42,8 +43,9 @@ Cependant, si vous voulez changer les valeurs par défaut, vous pouvez modifier 
 Apres avoir modifié les informations de la base de données, il faut la remplir de contenu fictif à l'aide des commandes suivantes, toujours dans le dossier **server**:
 
 ```bash
-> node ace migration:run
-> node ace seed
+> adonis key:generate
+> adonis migration:run
+> adonis seed
 ```
 
 Il faut ensuite modifier le fichier `hosts` de Windows qui se trouve au chemin suivant: `C:\Windows\System32\drivers\etc`  
