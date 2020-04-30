@@ -33,7 +33,7 @@
         <div
           ref="invoice"
           class="text-gray-900 bg-white rounded-lg shadow-xs"
-          style="min-width: 620px;"
+          style="min-width: 780px;"
         >
           <div>
             <div class="px-12 py-20 mx-auto">
@@ -46,13 +46,12 @@
                     <p>Due date:</p>
                   </div>
                   <div class="ml-8 text-right">
-                    <!-- <p>#{{ invoice.number }}</p> -->
                     <input
                       v-model="invoice.number"
-                      class="inline-flex w-16 text-right invisible-input"
+                      class="flex w-16 ml-auto text-right invisible-input"
                       type="number"
                     />
-                    <p>{{ new Date(invoice.created_at).toLocaleDateString() }}</p>
+                    <DateTimePicker v-model="invoice.created_at" :hasTime="false" />
                     <p>{{ dueDate }}</p>
                   </div>
                 </div>
@@ -60,10 +59,10 @@
               <table class="w-full mt-8 table-fixed">
                 <thead>
                   <tr>
-                    <th class="px-4 py-4 text-left border-b border-gray-200">Description</th>
-                    <th class="px-4 py-4 text-right border-b border-gray-200">Hours</th>
-                    <th class="px-4 py-4 text-right border-b border-gray-200">Amount</th>
-                    <th class="px-4 py-4 text-right border-b border-gray-200"></th>
+                    <th class="px-4 py-4 text-left border-b border-gray-200 w-desc">Description</th>
+                    <th class="px-4 py-4 text-right border-b border-gray-200 w-hours">Hours</th>
+                    <th class="px-4 py-4 text-right border-b border-gray-200 w-amount">Amount</th>
+                    <th class="px-4 py-4 text-right border-b border-gray-200 w-delete"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -157,10 +156,12 @@
 </template>
 
 <script>
+import DateTimePicker from '@/components/Form/DateTimePicker.vue'
 import InputHours from '@/components/Invoices/InputHours.vue'
 
 export default {
   components: {
+    DateTimePicker,
     InputHours
   },
 
