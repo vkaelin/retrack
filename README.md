@@ -1,5 +1,5 @@
-# Ado-auth
-Projet de Pré-TPI 2020 à l'ETML - Valentin Kaelin
+# Retrack
+Projet de Pré-TPI 2020 - Valentin Kaelin
 
 ## Installation
 
@@ -18,14 +18,14 @@ Si les commandes ne fonctionnent pas, essayez de relancer votre console.
 Si cela ne fonctionne toujours pas, il vous faut ajouter le dossier d'installation de Node.js à vos variables d'environnements.
 
 ### Mettre en place l'environnement de développement
-Avant de commencer, il vous faut lancer UwAmp avec vos serveurs Apache et MySQL.
+Avant de commencer, il vous faut lancer un serveur de base de données sur votre machine, par exemple MySQL.
 
-Il vous faut ensuite créer une base de données via l'interface PHPmyadmin nommée **adoauth** dans notre cas.
+Il vous faut ensuite créer une base de données nommée **retrack** dans notre cas.
 
 Positionnez-vous à l'emplacement souhaité pour cloner le projet sur votre ordinateur.
 ```bash
-> git clone https://github.com/vkaelin/ado-auth.git
-> cd ado-auth/client
+> git clone https://github.com/vkaelin/retrack.git
+> cd retrack/client
 > npm install
 
 # Puis
